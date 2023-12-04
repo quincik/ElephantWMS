@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+    ">
+    <!-- this is an included XML file where we only the routeContext -->
+    <camelContext  id="areaRoutes" xmlns="http://camel.apache.org/schema/spring">
+        <!-- we can have a route -->
+        <route id="createArea">
+            <from uri="direct:createArea"/>
+            <process ref="simpleAreaParse" />
+            <!-- dimensionalAreaVerification or simpleAreaVerification -->
+            <process ref="dimensionalAreaVerification"/>
+            <when>
+                <simple>${body.success} ==  true</simple>
+                <process ref="simpleCreateArea"/>
+            </when>
+        </route>
+    </camelContext >
+</beans>
