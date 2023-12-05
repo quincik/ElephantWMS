@@ -4,25 +4,24 @@
 
     <!-- selectByName -->
     <update id="freezeInventory" >
-        UPDATE transport_inventory
-            SET frozenQuantity = frozenQuantity + #{frozenIncrement} ,
-                availableQuantity = availableQuantity - #{frozenIncrement}
+        UPDATE inventory_details
+            SET frozen_quantity = frozen_quantity + #{frozenIncrement} ,
+                available_quantity = available_quantity - #{frozenIncrement},
+                modify_time=now()
         WHERE
-            frozenQuantity + #{frozenIncrement} >= 0
-            and availableQuantity - #{frozenIncrement} >= 0
-            and storageCode = #{inventory.storageCode}
-            and itemBatch = #{inventory.itemBatch}
-            and quality = #{inventory.quality}
+            frozen_quantity + #{frozenIncrement} >= 0
+            and available_quantity - #{frozenIncrement} >= 0
+            and storage_code = #{inventory.storageCode}
+            and item_batch = #{inventory.itemBatch}
     </update>
 
     <update id="modifyInventory" >
-        UPDATE transport_inventory
-            SET availableQuantity = availableQuantity + #{increment}
+        UPDATE inventory_details
+            SET available_quantity = available_quantity + #{increment},modify_time=now()
         WHERE
-            and availableQuantity + #{increment} >= 0
-            and storageCode = #{inventory.storageCode}
-            and itemBatch = #{inventory.itemBatch}
-            and quality = #{inventory.quality}
+           available_quantity + #{increment} >= 0
+            and storage_code = #{inventory.storageCode}
+            and item_batch = #{inventory.itemBatch}
     </update>
 
 </mapper>

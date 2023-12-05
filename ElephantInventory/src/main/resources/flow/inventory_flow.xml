@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+    ">
+    <!-- this is an included XML file where we only the routeContext -->
+    <routeContext  id="inventoryFlow" xmlns="http://camel.apache.org/schema/spring">
+        <route id="modifyInventory">
+            <from uri="direct:modifyInventory"/>
+            <when>
+                <simple>${header.modify.operation} == ${type:com.elephant.wms.core.enums.InventoryOptEnum.ADJUST}</simple>
+                <process ref="simpleQueryDetail" />
+                <choice>
+                    <when>
+                        <simple>${body} != null</simple>
+                        <process ref="simpleModifyDetail"/>
+                    </when>
+                    <otherwise>
+                        <process ref="simpleBuildDetail" />
+                        <process ref="simpleCreateDetail" />
+                    </otherwise>
+                </choice>
+            </when>
+
+        </route>
+    </routeContext >
+</beans>

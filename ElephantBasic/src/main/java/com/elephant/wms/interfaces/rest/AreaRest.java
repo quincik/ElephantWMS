@@ -10,6 +10,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.Data;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +23,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/area")
 public class AreaRest extends BasicRest {
-
-
 
     @Data
     public static class AreaVO{
@@ -42,8 +41,8 @@ public class AreaRest extends BasicRest {
     @Resource
     AreaMapper areaMapper;
 
-    @Resource
-    CamelContext context;
+    @Produce
+    ProducerTemplate producerTemplate;
 
     @PostMapping("/query")
     public Result<List<AreaVO>> query(@RequestBody  Map<String, Object> param) {
@@ -57,11 +56,8 @@ public class AreaRest extends BasicRest {
 
     @PostMapping("/create")
     public Result<Boolean> create(@RequestBody Map<String, Object> param){
-
-        ProducerTemplate template = context.createProducerTemplate();
         Result<Boolean> result = (Result<Boolean>)
-                template.requestBody("direct:createArea", param);
-
+                producerTemplate.requestBody("direct:createArea", param);
         return result;
     }
 

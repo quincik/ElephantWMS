@@ -25,6 +25,11 @@
             <artifactId>ElephantBasic</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.elephant.wms</groupId>
+            <artifactId>ElephantInventory</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springdoc</groupId>

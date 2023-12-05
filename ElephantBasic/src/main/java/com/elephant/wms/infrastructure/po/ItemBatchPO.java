@@ -21,7 +21,6 @@ public class ItemBatchPO {
     private String manufacturingDate;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     private String receiptDate;
-    private String basicItemBatchCol;
     private String referenceCode;
 
 }

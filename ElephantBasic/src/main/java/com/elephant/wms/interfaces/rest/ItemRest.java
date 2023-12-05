@@ -11,6 +11,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.Data;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,8 +49,8 @@ public class ItemRest extends BasicRest {
     @Resource
     ItemMapper itemMapper;
 
-    @Resource
-    CamelContext context;
+    @Produce
+    ProducerTemplate producerTemplate;
 
     @PostMapping("/query")
     public Result<List<ItemVO>> query(@RequestBody  Map<String, Object> param) {
@@ -64,10 +65,8 @@ public class ItemRest extends BasicRest {
     @PostMapping("/create")
     public Result<Boolean> create(@RequestBody Map<String, Object> param){
 
-        ProducerTemplate template = context.createProducerTemplate();
         Result<Boolean> result = (Result<Boolean>)
-                template.requestBody("direct:createItem", param);
-
+                producerTemplate.requestBody("direct:createItem", param);
         return result;
     }
 

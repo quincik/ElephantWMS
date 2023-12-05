@@ -7,8 +7,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
 
 @Data
-@TableName("inventory_logs")
-public class InventoryLogPO {
+@TableName("inventory_freeze")
+public class InventoryFreezePO {
 
     @TableId
     private Long id;

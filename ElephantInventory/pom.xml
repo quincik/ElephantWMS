@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>ElephantInventory</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -18,11 +19,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.elephant.wms</groupId>
-            <artifactId>ElephantCommon</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
             <groupId>com.elephant.wms</groupId>
             <artifactId>ElephantBasic</artifactId>

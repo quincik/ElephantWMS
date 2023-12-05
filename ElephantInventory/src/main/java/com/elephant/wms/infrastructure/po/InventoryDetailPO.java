@@ -23,7 +23,6 @@ public class InventoryDetailPO {
     private String ownerCode;
     private String storageCode;
     private String areaCode;
-    private Integer quality;
     private Integer availableQuantity;
     private Integer frozenQuantity;
 }

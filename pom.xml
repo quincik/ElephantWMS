@@ -20,6 +20,7 @@
     </modules>
 
     <properties>
+        <project.version>1.0-SNAPSHOT</project.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,6 +28,7 @@
         <mybatis.plus.version>3.5.4.1</mybatis.plus.version>
         <fastjson.version>2.0.42</fastjson.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <spring.boot.version>3.2.0</spring.boot.version>
         <camel-spring-boot-xml-starter.version>4.2.0</camel-spring-boot-xml-starter.version>
     </properties>
 
@@ -47,6 +49,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
         </dependency>
 
         <dependency>

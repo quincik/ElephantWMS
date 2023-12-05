@@ -5,6 +5,6 @@ import com.elephant.wms.infrastructure.po.InventoryDetailPO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface InventoryLogMapper extends BaseMapper<InventoryDetailPO> {
+public interface InventoryFreezeMapper extends BaseMapper<InventoryDetailPO> {
 
 }

@@ -9,7 +9,6 @@ public class ModifyInventoryBO {
     private Integer amount;
     private Long itemBatch;
     private String storageCode;
-    private Integer quality;
 
     private InventoryOptEnum operation;
 

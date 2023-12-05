@@ -1,5 +1,5 @@
 package com.elephant.wms.core.enums;
 
 public enum InventoryOptEnum {
-    FREEZE,ADJUST
+    FREEZE,UNFREEZE,ADJUST,FORCE
 }

@@ -5,7 +5,7 @@
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
     ">
     <!-- this is an included XML file where we only the routeContext -->
-    <camelContext  id="areaRoutes" xmlns="http://camel.apache.org/schema/spring">
+    <routeContext  id="basicFlow"  xmlns="http://camel.apache.org/schema/spring">
         <!-- we can have a route -->
         <route id="createArea">
             <from uri="direct:createArea"/>
@@ -50,5 +50,5 @@
                 <process ref="simpleOwnerCreate"/>
             </when>
         </route>
-    </camelContext >
+    </routeContext  >
 </beans>
