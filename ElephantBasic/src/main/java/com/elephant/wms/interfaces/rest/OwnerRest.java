@@ -1,11 +1,14 @@
 package com.elephant.wms.interfaces.rest;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.elephant.wms.infrastructure.mapper.AreaMapper;
-import com.elephant.wms.infrastructure.po.AreaPO;
+import com.elephant.wms.infrastructure.mapper.OwnerMapper;
+import com.elephant.wms.infrastructure.object.Result;
+import com.elephant.wms.infrastructure.po.OwnerPO;
 import com.elephant.wms.infrastructure.template.rest.BasicRest;
 import com.elephant.wms.interfaces.rest.convert.Convert;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.Data;
@@ -16,44 +19,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.elephant.wms.infrastructure.object.Result;
-
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/area")
-public class AreaRest extends BasicRest {
+@RequestMapping("/owner")
+public class OwnerRest extends BasicRest {
 
 
 
     @Data
-    public static class AreaVO{
-
+    public static class OwnerVO{
         private Long id;
+        private String createTime; // Changed to String
+        private String modifyTime; // Changed to String
+
         private String code;
-        private Integer type;
-        private Integer length;
-        private Integer height;
-        private Integer width;
         private Integer status;
-        private String createTime;
-        private String modifyTime;
+        private String name;
+        private String contacts;
+        private String contactsPhone;
+        private JsonNode extend;
     }
 
     @Resource
-    AreaMapper areaMapper;
+    OwnerMapper ownerMapper;
 
     @Resource
     CamelContext context;
 
     @PostMapping("/query")
-    public Result<List<AreaVO>> query(@RequestBody  Map<String, Object> param) {
+    public Result<List<OwnerVO>> query(@RequestBody  Map<String, Object> param) {
 
-        IPage<AreaPO> areas = super.query(param, AreaPO.class);
-        Result<List<AreaVO>> result = new Result<>(areas.getCurrent(),areas.getSize(),areas.getTotal());
-        result.setData(Convert.INSTANCE.toAreaVO(areas.getRecords()));
+        IPage<OwnerPO> areas = super.query(param, OwnerPO.class);
+        Result<List<OwnerVO>> result = new Result<>(areas.getCurrent(),areas.getSize(),areas.getTotal());
+        result.setData(Convert.INSTANCE.toOwnerVO(areas.getRecords()));
 
         return  result;
     }
@@ -63,7 +63,7 @@ public class AreaRest extends BasicRest {
 
         ProducerTemplate template = context.createProducerTemplate();
         Result<Boolean> result = (Result<Boolean>)
-                template.requestBody("direct:createArea", param);
+                template.requestBody("direct:createOwner", param);
 
         return result;
     }
@@ -71,6 +71,6 @@ public class AreaRest extends BasicRest {
     @Override
     @PostConstruct
     protected void init() {
-        mapper = areaMapper;
+        mapper = ownerMapper;
     }
 }

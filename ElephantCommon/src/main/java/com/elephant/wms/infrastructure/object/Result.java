@@ -1,4 +1,4 @@
-package com.elephant.wms.infrastructure.common;
+package com.elephant.wms.infrastructure.object;
 
 import lombok.Data;
 
@@ -28,5 +28,10 @@ public class Result<T> {
     public Result(Boolean success,String message){
         this.success = success;
         this.message = message;
+    }
+
+    public Result(Boolean success,T data){
+        this.data = data;
+        this.success = success;
     }
 }

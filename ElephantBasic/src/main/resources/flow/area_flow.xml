@@ -10,11 +10,44 @@
         <route id="createArea">
             <from uri="direct:createArea"/>
             <process ref="simpleAreaParse" />
-            <!-- dimensionalAreaVerification or simpleAreaVerification -->
-            <process ref="dimensionalAreaVerification"/>
+            <!-- verificationDimensionalArea or simpleAreaVerification -->
+            <process ref="verificationDimensionalArea"/>
             <when>
                 <simple>${body.success} ==  true</simple>
-                <process ref="simpleCreateArea"/>
+                <process ref="simpleAreaCreate"/>
+            </when>
+        </route>
+
+        <route id="createStorage">
+            <from uri="direct:createStorage"/>
+            <process ref="simpleStorageParse" />
+            <!-- verificationDimensionalArea or simpleAreaVerification -->
+            <process ref="simpleStorageVerification"/>
+            <when>
+                <simple>${body.success} ==  true</simple>
+                <process ref="simpleStorageCreate"/>
+            </when>
+        </route>
+
+        <route id="createItem">
+            <from uri="direct:createItem"/>
+            <process ref="simpleItemParse" />
+            <!-- verificationDimensionalArea or simpleAreaVerification -->
+            <process ref="simpleItemVerification"/>
+            <when>
+                <simple>${body.success} ==  true</simple>
+                <process ref="simpleItemCreate"/>
+            </when>
+        </route>
+
+        <route id="createOwner">
+            <from uri="direct:createOwner"/>
+            <process ref="simpleOwnerParse" />
+            <!-- verificationDimensionalArea or simpleAreaVerification -->
+            <process ref="simpleOwnerVerification"/>
+            <when>
+                <simple>${body.success} ==  true</simple>
+                <process ref="simpleOwnerCreate"/>
             </when>
         </route>
     </camelContext >

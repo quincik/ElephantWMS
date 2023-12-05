@@ -1,11 +1,14 @@
 package com.elephant.wms.interfaces.rest;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.elephant.wms.infrastructure.mapper.AreaMapper;
-import com.elephant.wms.infrastructure.po.AreaPO;
+import com.elephant.wms.infrastructure.mapper.StorageMapper;
+import com.elephant.wms.infrastructure.object.Result;
+import com.elephant.wms.infrastructure.po.StoragePO;
 import com.elephant.wms.infrastructure.template.rest.BasicRest;
 import com.elephant.wms.interfaces.rest.convert.Convert;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.Data;
@@ -16,44 +19,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.elephant.wms.infrastructure.object.Result;
-
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/area")
-public class AreaRest extends BasicRest {
+@RequestMapping("/storage")
+public class StorageRest extends BasicRest {
 
 
 
     @Data
-    public static class AreaVO{
+    public static class StorageVO{
 
         private Long id;
+        private String createTime; // Changed to String
+        private String modifyTime; // Changed to String
         private String code;
-        private Integer type;
-        private Integer length;
-        private Integer height;
-        private Integer width;
         private Integer status;
-        private String createTime;
-        private String modifyTime;
+        private Integer type;
+        private String areaCode;
+        private Integer length;
+        private Integer width;
+        private Integer height;
+        private Integer maxWeight;
+        private Integer sortIndex;
+        private JsonNode extend;
     }
 
     @Resource
-    AreaMapper areaMapper;
+    StorageMapper storageMapper;
 
     @Resource
     CamelContext context;
 
     @PostMapping("/query")
-    public Result<List<AreaVO>> query(@RequestBody  Map<String, Object> param) {
+    public Result<List<StorageVO>> query(@RequestBody  Map<String, Object> param) {
 
-        IPage<AreaPO> areas = super.query(param, AreaPO.class);
-        Result<List<AreaVO>> result = new Result<>(areas.getCurrent(),areas.getSize(),areas.getTotal());
-        result.setData(Convert.INSTANCE.toAreaVO(areas.getRecords()));
+        IPage<StoragePO> areas = super.query(param, StoragePO.class);
+        Result<List<StorageVO>> result = new Result<>(areas.getCurrent(),areas.getSize(),areas.getTotal());
+        result.setData(Convert.INSTANCE.toStorageVO(areas.getRecords()));
 
         return  result;
     }
@@ -63,7 +67,7 @@ public class AreaRest extends BasicRest {
 
         ProducerTemplate template = context.createProducerTemplate();
         Result<Boolean> result = (Result<Boolean>)
-                template.requestBody("direct:createArea", param);
+                template.requestBody("direct:createStorage", param);
 
         return result;
     }
@@ -71,6 +75,6 @@ public class AreaRest extends BasicRest {
     @Override
     @PostConstruct
     protected void init() {
-        mapper = areaMapper;
+        mapper = storageMapper;
     }
 }

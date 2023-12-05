@@ -1,9 +1,9 @@
 package com.elephant.wms.interfaces.rest;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.elephant.wms.infrastructure.mapper.AreaMapper;
-import com.elephant.wms.infrastructure.po.AreaPO;
+import com.elephant.wms.infrastructure.mapper.ItemBatchMapper;
+import com.elephant.wms.infrastructure.object.Result;
+import com.elephant.wms.infrastructure.po.ItemBatchPO;
 import com.elephant.wms.infrastructure.template.rest.BasicRest;
 import com.elephant.wms.interfaces.rest.convert.Convert;
 import jakarta.annotation.PostConstruct;
@@ -16,20 +16,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.elephant.wms.infrastructure.object.Result;
-
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/area")
-public class AreaRest extends BasicRest {
+@RequestMapping("/itemBatch")
+public class ItemBatchRest extends BasicRest {
 
 
 
     @Data
-    public static class AreaVO{
+    public static class ItemBatchVO{
 
         private Long id;
         private String code;
@@ -43,34 +40,21 @@ public class AreaRest extends BasicRest {
     }
 
     @Resource
-    AreaMapper areaMapper;
-
-    @Resource
-    CamelContext context;
+    ItemBatchMapper itemBatchMapper;
 
     @PostMapping("/query")
-    public Result<List<AreaVO>> query(@RequestBody  Map<String, Object> param) {
+    public Result<List<ItemBatchVO>> query(@RequestBody  Map<String, Object> param) {
 
-        IPage<AreaPO> areas = super.query(param, AreaPO.class);
-        Result<List<AreaVO>> result = new Result<>(areas.getCurrent(),areas.getSize(),areas.getTotal());
-        result.setData(Convert.INSTANCE.toAreaVO(areas.getRecords()));
+        IPage<ItemBatchPO> ItemBatchs = super.query(param, ItemBatchPO.class);
+        Result<List<ItemBatchVO>> result = new Result<>(ItemBatchs.getCurrent(),ItemBatchs.getSize(),ItemBatchs.getTotal());
+        result.setData(Convert.INSTANCE.toItemBatchVO(ItemBatchs.getRecords()));
 
         return  result;
-    }
-
-    @PostMapping("/create")
-    public Result<Boolean> create(@RequestBody Map<String, Object> param){
-
-        ProducerTemplate template = context.createProducerTemplate();
-        Result<Boolean> result = (Result<Boolean>)
-                template.requestBody("direct:createArea", param);
-
-        return result;
     }
 
     @Override
     @PostConstruct
     protected void init() {
-        mapper = areaMapper;
+        mapper = itemBatchMapper;
     }
 }
