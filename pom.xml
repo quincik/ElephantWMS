@@ -16,6 +16,7 @@
         <module>ElephantInner</module>
         <module>ElephantInventory</module>
         <module>ElephantCommon</module>
+        <module>ElephantSystem</module>
     </modules>
 
     <properties>
