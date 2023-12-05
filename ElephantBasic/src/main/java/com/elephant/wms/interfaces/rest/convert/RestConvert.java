@@ -9,8 +9,8 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper
-public interface Convert {
-    Convert INSTANCE = Mappers.getMapper(Convert.class);
+public interface RestConvert {
+    RestConvert INSTANCE = Mappers.getMapper(RestConvert.class);
     List<AreaRest.AreaVO> toAreaVO(List<AreaPO> areaPO);
 
     List<StorageRest.StorageVO> toStorageVO(List<StoragePO> records);

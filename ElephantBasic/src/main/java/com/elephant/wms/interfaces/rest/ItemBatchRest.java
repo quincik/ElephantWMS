@@ -5,12 +5,10 @@ import com.elephant.wms.infrastructure.mapper.ItemBatchMapper;
 import com.elephant.wms.infrastructure.object.Result;
 import com.elephant.wms.infrastructure.po.ItemBatchPO;
 import com.elephant.wms.infrastructure.template.rest.BasicRest;
-import com.elephant.wms.interfaces.rest.convert.Convert;
+import com.elephant.wms.interfaces.rest.convert.RestConvert;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.Data;
-import org.apache.camel.CamelContext;
-import org.apache.camel.ProducerTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +45,7 @@ public class ItemBatchRest extends BasicRest {
 
         IPage<ItemBatchPO> ItemBatchs = super.query(param, ItemBatchPO.class);
         Result<List<ItemBatchVO>> result = new Result<>(ItemBatchs.getCurrent(),ItemBatchs.getSize(),ItemBatchs.getTotal());
-        result.setData(Convert.INSTANCE.toItemBatchVO(ItemBatchs.getRecords()));
+        result.setData(RestConvert.INSTANCE.toItemBatchVO(ItemBatchs.getRecords()));
 
         return  result;
     }

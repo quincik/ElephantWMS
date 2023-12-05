@@ -5,7 +5,7 @@ import com.elephant.wms.infrastructure.mapper.ItemMapper;
 import com.elephant.wms.infrastructure.object.Result;
 import com.elephant.wms.infrastructure.po.ItemPO;
 import com.elephant.wms.infrastructure.template.rest.BasicRest;
-import com.elephant.wms.interfaces.rest.convert.Convert;
+import com.elephant.wms.interfaces.rest.convert.RestConvert;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
@@ -56,7 +56,7 @@ public class ItemRest extends BasicRest {
 
         IPage<ItemPO> areas = super.query(param, ItemPO.class);
         Result<List<ItemVO>> result = new Result<>(areas.getCurrent(),areas.getSize(),areas.getTotal());
-        result.setData(Convert.INSTANCE.toItemVO(areas.getRecords()));
+        result.setData(RestConvert.INSTANCE.toItemVO(areas.getRecords()));
 
         return  result;
     }

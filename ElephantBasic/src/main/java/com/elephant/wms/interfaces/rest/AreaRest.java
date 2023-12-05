@@ -1,11 +1,11 @@
 package com.elephant.wms.interfaces.rest;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.elephant.wms.infrastructure.mapper.AreaMapper;
+import com.elephant.wms.infrastructure.object.Result;
 import com.elephant.wms.infrastructure.po.AreaPO;
 import com.elephant.wms.infrastructure.template.rest.BasicRest;
-import com.elephant.wms.interfaces.rest.convert.Convert;
+import com.elephant.wms.interfaces.rest.convert.RestConvert;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.Data;
@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.elephant.wms.infrastructure.object.Result;
-
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +50,7 @@ public class AreaRest extends BasicRest {
 
         IPage<AreaPO> areas = super.query(param, AreaPO.class);
         Result<List<AreaVO>> result = new Result<>(areas.getCurrent(),areas.getSize(),areas.getTotal());
-        result.setData(Convert.INSTANCE.toAreaVO(areas.getRecords()));
+        result.setData(RestConvert.INSTANCE.toAreaVO(areas.getRecords()));
 
         return  result;
     }

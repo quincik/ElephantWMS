@@ -1,13 +1,11 @@
 package com.elephant.wms.interfaces.rest;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.elephant.wms.infrastructure.mapper.OwnerMapper;
 import com.elephant.wms.infrastructure.object.Result;
 import com.elephant.wms.infrastructure.po.OwnerPO;
 import com.elephant.wms.infrastructure.template.rest.BasicRest;
-import com.elephant.wms.interfaces.rest.convert.Convert;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.elephant.wms.interfaces.rest.convert.RestConvert;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
@@ -53,7 +51,7 @@ public class OwnerRest extends BasicRest {
 
         IPage<OwnerPO> areas = super.query(param, OwnerPO.class);
         Result<List<OwnerVO>> result = new Result<>(areas.getCurrent(),areas.getSize(),areas.getTotal());
-        result.setData(Convert.INSTANCE.toOwnerVO(areas.getRecords()));
+        result.setData(RestConvert.INSTANCE.toOwnerVO(areas.getRecords()));
 
         return  result;
     }

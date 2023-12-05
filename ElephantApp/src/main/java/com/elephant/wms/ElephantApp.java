@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 @MapperScan("com.elephant.wms.infrastructure.mapper")
-@ImportResource(value = "classpath:/flow/*.xml")
+@ImportResource(locations = {"classpath:/flow/*.xml","classpath:/mapper/*.xml"})
 public class ElephantApp {
 
     public static void main(String[] args) {

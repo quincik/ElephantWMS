@@ -1,13 +1,11 @@
 package com.elephant.wms.interfaces.rest;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.elephant.wms.infrastructure.mapper.StorageMapper;
 import com.elephant.wms.infrastructure.object.Result;
 import com.elephant.wms.infrastructure.po.StoragePO;
 import com.elephant.wms.infrastructure.template.rest.BasicRest;
-import com.elephant.wms.interfaces.rest.convert.Convert;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.elephant.wms.interfaces.rest.convert.RestConvert;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
@@ -57,7 +55,7 @@ public class StorageRest extends BasicRest {
 
         IPage<StoragePO> areas = super.query(param, StoragePO.class);
         Result<List<StorageVO>> result = new Result<>(areas.getCurrent(),areas.getSize(),areas.getTotal());
-        result.setData(Convert.INSTANCE.toStorageVO(areas.getRecords()));
+        result.setData(RestConvert.INSTANCE.toStorageVO(areas.getRecords()));
 
         return  result;
     }
