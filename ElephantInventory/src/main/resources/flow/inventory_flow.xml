@@ -14,7 +14,7 @@
                 <choice>
                     <when><simple>${header.modify.scenario.getCode()} == 10</simple>
                         <process ref="receivingRule"/>
-                        <when><simple>${body.data} == true</simple>
+                        <when><simple>${body.success} == true</simple>
                             <to uri="direct:adjustInventory"/>
                         </when>
                     </when>

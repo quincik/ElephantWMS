@@ -17,9 +17,7 @@ public class ItemBatchPO {
     private String modifyTime;
     private String itemCode;
     private String ownerCode;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     private String manufacturingDate;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     private String receiptDate;
     private String referenceCode;
 

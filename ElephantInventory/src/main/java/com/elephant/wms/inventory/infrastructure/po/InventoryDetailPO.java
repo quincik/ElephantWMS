@@ -25,4 +25,5 @@ public class InventoryDetailPO {
     private String areaCode;
     private Integer availableQuantity;
     private Integer frozenQuantity;
+    private Integer standard;
 }

@@ -17,7 +17,7 @@ public class InventoryServiceImpl implements InventoryService {
     ProducerTemplate producerTemplate;
 
     @Override
-    public Result<Boolean> modifyInventory(ModifyInventoryParam modifyParam) {
+    public Result<Boolean> adjustInventory(ModifyInventoryParam modifyParam) {
 
         // TODO 参数检查
         ModifyInventoryBO modify =

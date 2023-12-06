@@ -36,9 +36,8 @@ public class ItemRest extends BasicRest {
         private Integer status;
         private String name;
         private String ownerCode;
-        private Integer expiryDate;
+        private Integer expiry;
         private Integer specs;
-        private JsonNode extend;
         private Integer weight;
         private Integer length;
         private Integer height;

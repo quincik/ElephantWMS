@@ -9,6 +9,8 @@ import com.elephant.wms.basic.interfaces.rest.convert.RestConvert;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.Data;
+import org.apache.camel.Produce;
+import org.apache.camel.ProducerTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/itemBatch")
 public class ItemBatchRest extends BasicRest {
-
-
 
     @Data
     public static class ItemBatchVO{
@@ -40,6 +40,9 @@ public class ItemBatchRest extends BasicRest {
     @Resource
     ItemBatchMapper itemBatchMapper;
 
+    @Produce
+    ProducerTemplate producerTemplate;
+
     @PostMapping("/query")
     public Result<List<ItemBatchVO>> query(@RequestBody  Map<String, Object> param) {
 
@@ -48,6 +51,14 @@ public class ItemBatchRest extends BasicRest {
         result.setData(RestConvert.INSTANCE.toItemBatchVO(ItemBatchs.getRecords()));
 
         return  result;
+    }
+
+    @PostMapping("/create")
+    public Result<Boolean> create(@RequestBody Map<String, Object> param){
+
+        Result<Boolean> result = (Result<Boolean>)
+                producerTemplate.requestBody("direct:createItemBatch", param);
+        return result;
     }
 
     @Override

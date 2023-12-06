@@ -11,7 +11,7 @@
             <from uri="direct:createArea"/>
             <process ref="simpleAreaParse" />
             <!-- verificationDimensionalArea or simpleAreaVerification -->
-            <process ref="verificationDimensionalArea"/>
+            <process ref="simpleAreaVerification"/>
             <when>
                 <simple>${body.success} ==  true</simple>
                 <process ref="simpleAreaCreate"/>
@@ -37,6 +37,17 @@
             <when>
                 <simple>${body.success} ==  true</simple>
                 <process ref="simpleItemCreate"/>
+            </when>
+        </route>
+
+        <route id="createItemBatch">
+            <from uri="direct:createItemBatch"/>
+            <process ref="simpleItemBatchParse" />
+            <!-- verificationDimensionalArea or simpleAreaVerification -->
+            <process ref="simpleItemBatchVerification"/>
+            <when>
+                <simple>${body.success} ==  true</simple>
+                <process ref="simpleItemBatchCreate"/>
             </when>
         </route>
 

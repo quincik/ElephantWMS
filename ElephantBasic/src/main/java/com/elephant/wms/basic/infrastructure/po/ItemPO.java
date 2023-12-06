@@ -21,7 +21,7 @@ public class ItemPO {
     private Integer status;
     private String name;
     private String ownerCode;
-    private Integer expiryDate;
+    private Integer expiry;
     private Integer specs;
     private String extend;
     private Integer weight;

@@ -17,6 +17,6 @@ public interface InventoryService {
 
     }
 
-    public Result<Boolean> modifyInventory(ModifyInventoryParam modify);
+    public Result<Boolean> adjustInventory(ModifyInventoryParam modify);
 
 }

@@ -18,21 +18,9 @@ import java.util.Map;
 @RequestMapping("/inventory/details")
 public class InventoryDetailRest {
 
-    @Resource
-    InventoryService inventoryService;
-
     @PostMapping("/query")
     public Result<Boolean> query(@RequestBody Map<String, Object> param){
 
-        InventoryService.ModifyInventoryParam modify = new InventoryService.ModifyInventoryParam();
-        modify.setAmount(1000);
-        modify.setItemBatch(1l);
-        modify.setStorageCode("A01-01-01");
-        modify.setIdempotentKey("MD938489395");
-        modify.setReferenceCode("ASN202938493");
-        modify.setScenario(10);
-
-        inventoryService.modifyInventory(modify);
         return new Result<>();
     }
 

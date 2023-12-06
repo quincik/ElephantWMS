@@ -19,6 +19,9 @@ public class SimpleStorageVerification extends Verification<StoragePO> {
         if(null == entity.getType()){
             result.add("类型为空");
         }
+        if(null == entity.getAreaCode()){
+            result.add("库区为空");
+        }
         return result;
     }
 

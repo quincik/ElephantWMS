@@ -37,7 +37,6 @@ public class OwnerRest extends BasicRest {
         private String name;
         private String contacts;
         private String contactsPhone;
-        private JsonNode extend;
     }
 
     @Resource
@@ -62,7 +61,6 @@ public class OwnerRest extends BasicRest {
         ProducerTemplate template = context.createProducerTemplate();
         Result<Boolean> result = (Result<Boolean>)
                 template.requestBody("direct:createOwner", param);
-
         return result;
     }
 

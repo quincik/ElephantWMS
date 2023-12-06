@@ -41,7 +41,6 @@ public class StorageRest extends BasicRest {
         private Integer height;
         private Integer maxWeight;
         private Integer sortIndex;
-        private JsonNode extend;
     }
 
     @Resource
