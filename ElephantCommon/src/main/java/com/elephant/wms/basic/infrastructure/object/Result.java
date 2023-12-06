@@ -34,4 +34,10 @@ public class Result<T> {
         this.data = data;
         this.success = success;
     }
+
+    public Result(Boolean success,T data,String message){
+        this.data = data;
+        this.success = success;
+        this.message = message;
+    }
 }

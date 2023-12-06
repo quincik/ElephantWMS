@@ -1,5 +1,6 @@
-package com.elephant.wms.core.component.area;
+package com.elephant.wms.core.component.area.customization;
 
+import com.elephant.wms.core.component.area.SimpleAreaVerification;
 import com.elephant.wms.infrastructure.object.Result;
 import com.elephant.wms.infrastructure.po.AreaPO;
 import jakarta.annotation.Nonnull;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class VerificationDimensionalArea extends  SimpleAreaVerification{
+public class VerificationDimensionalArea extends SimpleAreaVerification {
 
     @Override
     public @Nonnull List<String> verified(AreaPO entity) {

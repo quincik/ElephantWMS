@@ -1,6 +1,6 @@
 package com.elephant.wms.core.bo;
 
-import com.elephant.wms.core.enums.InventoryOptEnum;
+import com.elephant.wms.core.enums.OptEnum;
 import lombok.Data;
 
 @Data
@@ -10,9 +10,11 @@ public class ModifyInventoryBO {
     private Long itemBatch;
     private String storageCode;
 
-    private InventoryOptEnum operation;
+    private OptEnum operation;
 
     private String referenceCode;
     private String idempotentKey;
+
+    private Integer scenario;
 
 }

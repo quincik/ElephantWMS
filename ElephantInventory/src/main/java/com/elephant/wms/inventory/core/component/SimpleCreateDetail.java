@@ -1,6 +1,5 @@
 package com.elephant.wms.core.component;
 
-import com.elephant.wms.core.bo.ModifyInventoryBO;
 import com.elephant.wms.infrastructure.mapper.InventoryDetailMapper;
 import com.elephant.wms.infrastructure.object.Result;
 import com.elephant.wms.infrastructure.po.InventoryDetailPO;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-public class SimpleModifyDetail implements Processor {
+public class SimpleCreateDetail  implements Processor {
 
     @Resource
     InventoryDetailMapper inventoryDetailMapper;
@@ -20,17 +19,17 @@ public class SimpleModifyDetail implements Processor {
     @Transactional
     public void process(Exchange exchange) throws Exception {
 
-        ModifyInventoryBO modify = exchange.getMessage()
-                .getHeader("modify",ModifyInventoryBO.class);
-
         InventoryDetailPO detail = exchange.getMessage().getBody(InventoryDetailPO.class);
-        int count = inventoryDetailMapper.modifyInventory(modify.getAmount(), detail);
-        if( 0 == count) {
-            exchange.getMessage().setBody(new Result<InventoryDetailPO>(false,"调整库存失败。"));
+        if(null == detail) {
+            exchange.getMessage().setBody(new Result<>(false,"构建库存明细失败"));
             return;
         }
-        detail.setAvailableQuantity(detail.getAvailableQuantity() + modify.getAmount());
-        exchange.getMessage().setBody(new Result<>(detail));
+        int count = inventoryDetailMapper.insert(detail);
+        if( 0 == count){
+            exchange.getMessage().setBody(new Result<>(false,"插入库存明细失败"));
+            return;
+        }
+        exchange.getMessage().setBody(new Result<>());
 
     }
 }

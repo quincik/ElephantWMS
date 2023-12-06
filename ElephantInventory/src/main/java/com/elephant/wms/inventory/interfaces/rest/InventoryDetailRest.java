@@ -2,7 +2,7 @@ package com.elephant.wms.interfaces.rest;
 
 import com.elephant.wms.core.bo.ModifyInventoryBO;
 import com.elephant.wms.core.domain.ModifyInventoryService;
-import com.elephant.wms.core.enums.InventoryOptEnum;
+import com.elephant.wms.core.enums.OptEnum;
 import com.elephant.wms.infrastructure.object.Result;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,7 +26,7 @@ public class InventoryDetailRest {
         modify.setAmount(1000);
         modify.setItemBatch(1l);
         modify.setStorageCode("A01-01-01");
-        modify.setOperation(InventoryOptEnum.ADJUST);
+        modify.setOperation(OptEnum.ADJUST);
         modify.setIdempotentKey("MD938489393");
         modify.setReferenceCode("ASN202938493");
 
