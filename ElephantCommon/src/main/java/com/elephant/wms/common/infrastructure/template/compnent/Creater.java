@@ -9,8 +9,7 @@ import java.util.List;
 
 public abstract class Creater<T> implements Processor {
 
-    protected BaseMapper mapper;
-
+    protected abstract BaseMapper getMapper();
     @Override
     public void process(Exchange exchange) throws Exception {
 
@@ -19,7 +18,7 @@ public abstract class Creater<T> implements Processor {
         int fail = 0;
         for (int i = 0; i < entities.size(); i++) {
             try {
-                int count = mapper.insert(entities.get(i));
+                int count = getMapper().insert(entities.get(i));
                 if (1 != count) fail++;
             } catch (Throwable throwable) {
                 fail++;
@@ -36,6 +35,4 @@ public abstract class Creater<T> implements Processor {
         }
         exchange.getMessage().setBody(new Result<>());
     }
-
-    protected abstract void init();
 }

@@ -1,12 +1,12 @@
 package com.elephant.wms.basic.interfaces.rest;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.elephant.wms.basic.infrastructure.mapper.ItemBatchMapper;
-import com.elephant.wms.common.infrastructure.object.Result;
 import com.elephant.wms.basic.infrastructure.po.ItemBatchPO;
-import com.elephant.wms.common.infrastructure.template.rest.BasicRest;
 import com.elephant.wms.basic.interfaces.rest.convert.RestConvert;
-import jakarta.annotation.PostConstruct;
+import com.elephant.wms.common.infrastructure.object.Result;
+import com.elephant.wms.common.infrastructure.template.rest.BasicRest;
 import jakarta.annotation.Resource;
 import lombok.Data;
 import org.apache.camel.Produce;
@@ -22,6 +22,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/itemBatch")
 public class ItemBatchRest extends BasicRest {
+
+    @Override
+    protected BaseMapper getMapper() {
+        return itemBatchMapper;
+    }
 
     @Data
     public static class ItemBatchVO{
@@ -59,11 +64,5 @@ public class ItemBatchRest extends BasicRest {
         Result<Boolean> result = (Result<Boolean>)
                 producerTemplate.requestBody("direct:createItemBatch", param);
         return result;
-    }
-
-    @Override
-    @PostConstruct
-    protected void init() {
-        mapper = itemBatchMapper;
     }
 }

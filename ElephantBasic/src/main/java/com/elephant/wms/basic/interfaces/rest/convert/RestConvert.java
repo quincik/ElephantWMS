@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface RestConvert {
     RestConvert INSTANCE = Mappers.getMapper(RestConvert.class);
-    List<AreaRest.AreaVO> toAreaVO(List<AreaPO> areaPO);
+    List<AreaRest.AreaVO> toAreaVO(List<AreaPO> records);
 
     List<StorageRest.StorageVO> toStorageVO(List<StoragePO> records);
 

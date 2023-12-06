@@ -8,17 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class Parse <T> implements Processor {
-
-    protected Class<T> type;
-
     @Override
     public void process(Exchange exchange) throws Exception {
 
         Map<String, Object> param = exchange.getMessage().getBody(Map.class);
         String jsonStr = JSONObject.toJSONString(param);
-        T entry = JSONObject.parseObject(jsonStr, type);
+        T entry = JSONObject.parseObject(jsonStr, getType());
         exchange.getMessage().setBody(List.of(entry));
     }
 
-    protected abstract void init();
+    protected abstract Class<T> getType();
 }

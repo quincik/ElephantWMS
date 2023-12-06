@@ -1,5 +1,6 @@
 package com.elephant.wms.basic.interfaces.rest;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.elephant.wms.common.infrastructure.template.rest.BasicRest;
 import com.elephant.wms.basic.interfaces.rest.convert.RestConvert;
@@ -7,7 +8,7 @@ import com.elephant.wms.basic.infrastructure.mapper.ItemMapper;
 import com.elephant.wms.common.infrastructure.object.Result;
 import com.elephant.wms.basic.infrastructure.po.ItemPO;
 import com.fasterxml.jackson.databind.JsonNode;
-import jakarta.annotation.PostConstruct;
+
 import jakarta.annotation.Resource;
 import lombok.Data;
 import org.apache.camel.Produce;
@@ -25,6 +26,10 @@ import java.util.Map;
 public class ItemRest extends BasicRest {
 
 
+    @Override
+    protected BaseMapper getMapper() {
+        return itemMapper;
+    }
 
     @Data
     public static class ItemVO{
@@ -68,9 +73,4 @@ public class ItemRest extends BasicRest {
         return result;
     }
 
-    @Override
-    @PostConstruct
-    protected void init() {
-        mapper = itemMapper;
-    }
 }

@@ -5,17 +5,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.elephant.wms.common.infrastructure.object.Result;
 
+import java.util.List;
 import java.util.Map;
 
 public abstract  class  BasicRest {
 
-    protected BaseMapper mapper;
-
     private static final Long CURRENT  = 1L;
     private static final Long SIZE  = 10L;
 
-    protected abstract void init();
+    protected abstract BaseMapper getMapper();
 
     public <T,C>  IPage<C>  query(Map<String, Object> param,Class<C> entryClass){
 
@@ -29,6 +29,6 @@ public abstract  class  BasicRest {
         if(null != param.get("size"))
             page.setSize((Long) param.get("size"));
 
-        return mapper.selectPage(page, query);
+        return getMapper().selectPage(page, query);
     }
 }

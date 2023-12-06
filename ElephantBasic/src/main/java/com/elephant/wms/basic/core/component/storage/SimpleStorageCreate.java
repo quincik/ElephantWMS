@@ -1,9 +1,10 @@
 package com.elephant.wms.basic.core.component.storage;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.elephant.wms.basic.infrastructure.mapper.StorageMapper;
 import com.elephant.wms.basic.infrastructure.po.StoragePO;
 import com.elephant.wms.common.infrastructure.template.compnent.Creater;
-import jakarta.annotation.PostConstruct;
+
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
@@ -11,11 +12,10 @@ import org.springframework.stereotype.Component;
 public class SimpleStorageCreate extends Creater<StoragePO> {
 
     @Resource
-    private StorageMapper StorageMapper;
+    private StorageMapper storageMapper;
 
     @Override
-    @PostConstruct
-    protected void init() {
-        mapper = StorageMapper;
+    protected BaseMapper getMapper() {
+        return storageMapper;
     }
 }

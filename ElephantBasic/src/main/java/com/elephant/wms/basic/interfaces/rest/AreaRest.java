@@ -1,12 +1,13 @@
 package com.elephant.wms.basic.interfaces.rest;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.elephant.wms.common.infrastructure.template.rest.BasicRest;
 import com.elephant.wms.basic.interfaces.rest.convert.RestConvert;
 import com.elephant.wms.basic.infrastructure.mapper.AreaMapper;
 import com.elephant.wms.common.infrastructure.object.Result;
 import com.elephant.wms.basic.infrastructure.po.AreaPO;
-import jakarta.annotation.PostConstruct;
+
 import jakarta.annotation.Resource;
 import lombok.Data;
 import org.apache.camel.Produce;
@@ -22,6 +23,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/area")
 public class AreaRest extends BasicRest {
+
+    @Override
+    protected BaseMapper getMapper() {
+        return areaMapper;
+    }
 
     @Data
     public static class AreaVO{
@@ -58,11 +64,5 @@ public class AreaRest extends BasicRest {
         Result<Boolean> result = (Result<Boolean>)
                 producerTemplate.requestBody("direct:createArea", param);
         return result;
-    }
-
-    @Override
-    @PostConstruct
-    protected void init() {
-        mapper = areaMapper;
     }
 }
