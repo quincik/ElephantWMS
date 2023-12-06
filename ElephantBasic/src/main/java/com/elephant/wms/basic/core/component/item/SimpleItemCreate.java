@@ -1,8 +1,8 @@
-package com.elephant.wms.core.component.item;
+package com.elephant.wms.basic.core.component.item;
 
-import com.elephant.wms.infrastructure.mapper.ItemMapper;
-import com.elephant.wms.infrastructure.po.ItemPO;
-import com.elephant.wms.infrastructure.template.compnent.Creater;
+import com.elephant.wms.basic.infrastructure.mapper.ItemMapper;
+import com.elephant.wms.basic.infrastructure.po.ItemPO;
+import com.elephant.wms.common.infrastructure.template.compnent.Creater;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;

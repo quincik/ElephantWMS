@@ -1,7 +1,7 @@
-package com.elephant.wms.core.component.owner;
+package com.elephant.wms.basic.core.component.owner;
 
-import com.elephant.wms.infrastructure.po.OwnerPO;
-import com.elephant.wms.infrastructure.template.compnent.Verification;
+import com.elephant.wms.basic.infrastructure.po.OwnerPO;
+import com.elephant.wms.common.infrastructure.template.compnent.Verification;
 import jakarta.annotation.Nonnull;
 import org.springframework.stereotype.Component;
 

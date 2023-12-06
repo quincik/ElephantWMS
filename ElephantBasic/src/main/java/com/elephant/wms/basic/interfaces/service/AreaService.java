@@ -1,4 +1,4 @@
-package com.elephant.wms.interfaces.service;
+package com.elephant.wms.basic.interfaces.service;
 
 public interface AreaService {
 }

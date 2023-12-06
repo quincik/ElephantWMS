@@ -1,11 +1,8 @@
-package com.elephant.wms.core.component.area;
+package com.elephant.wms.basic.core.component.area;
 
-import com.elephant.wms.infrastructure.object.Result;
-import com.elephant.wms.infrastructure.po.AreaPO;
-import com.elephant.wms.infrastructure.template.compnent.Verification;
+import com.elephant.wms.basic.infrastructure.po.AreaPO;
+import com.elephant.wms.common.infrastructure.template.compnent.Verification;
 import jakarta.annotation.Nonnull;
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;

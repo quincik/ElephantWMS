@@ -1,4 +1,4 @@
-package com.elephant.wms.interfaces.service;
+package com.elephant.wms.basic.interfaces.service;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;

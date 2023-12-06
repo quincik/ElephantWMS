@@ -1,7 +1,7 @@
-package com.elephant.wms.core.component.storage;
+package com.elephant.wms.basic.core.component.storage;
 
-import com.elephant.wms.infrastructure.po.StoragePO;
-import com.elephant.wms.infrastructure.template.compnent.Verification;
+import com.elephant.wms.common.infrastructure.template.compnent.Verification;
+import com.elephant.wms.basic.infrastructure.po.StoragePO;
 import jakarta.annotation.Nonnull;
 import org.springframework.stereotype.Component;
 

@@ -1,11 +1,11 @@
-package com.elephant.wms.interfaces.rest;
+package com.elephant.wms.basic.interfaces.rest;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.elephant.wms.infrastructure.mapper.StorageMapper;
-import com.elephant.wms.infrastructure.object.Result;
-import com.elephant.wms.infrastructure.po.StoragePO;
-import com.elephant.wms.infrastructure.template.rest.BasicRest;
-import com.elephant.wms.interfaces.rest.convert.RestConvert;
+import com.elephant.wms.basic.infrastructure.mapper.StorageMapper;
+import com.elephant.wms.common.infrastructure.object.Result;
+import com.elephant.wms.basic.infrastructure.po.StoragePO;
+import com.elephant.wms.common.infrastructure.template.rest.BasicRest;
+import com.elephant.wms.basic.interfaces.rest.convert.RestConvert;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;

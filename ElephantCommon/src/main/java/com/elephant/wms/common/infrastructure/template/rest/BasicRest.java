@@ -1,4 +1,4 @@
-package com.elephant.wms.infrastructure.template.rest;
+package com.elephant.wms.common.infrastructure.template.rest;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

@@ -1,7 +1,7 @@
-package com.elephant.wms.infrastructure.mapper;
+package com.elephant.wms.basic.infrastructure.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.elephant.wms.infrastructure.po.OwnerPO;
+import com.elephant.wms.basic.infrastructure.po.OwnerPO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

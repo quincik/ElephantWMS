@@ -1,4 +1,4 @@
-package com.elephant.wms.interfaces.service;
+package com.elephant.wms.basic.interfaces.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;

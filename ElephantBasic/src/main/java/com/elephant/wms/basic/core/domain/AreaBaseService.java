@@ -1,4 +1,4 @@
-package com.elephant.wms.core.domain;
+package com.elephant.wms.basic.core.domain;
 
 import org.springframework.stereotype.Service;
 

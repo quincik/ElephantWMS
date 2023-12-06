@@ -1,9 +1,6 @@
-package com.elephant.wms.interfaces.service;
+package com.elephant.wms.inventory.interfaces.service;
 
-import com.elephant.wms.core.bo.ModifyInventoryBO;
-import com.elephant.wms.core.enums.OptEnum;
-import com.elephant.wms.infrastructure.object.Result;
-import com.elephant.wms.infrastructure.po.InventoryDetailPO;
+import com.elephant.wms.common.infrastructure.object.Result;
 import lombok.Data;
 
 public interface InventoryService {

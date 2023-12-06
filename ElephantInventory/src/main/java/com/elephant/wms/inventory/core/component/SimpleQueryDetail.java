@@ -1,9 +1,9 @@
-package com.elephant.wms.core.component;
+package com.elephant.wms.inventory.core.component;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.elephant.wms.core.bo.ModifyInventoryBO;
-import com.elephant.wms.infrastructure.mapper.InventoryDetailMapper;
-import com.elephant.wms.infrastructure.po.InventoryDetailPO;
+import com.elephant.wms.inventory.core.bo.ModifyInventoryBO;
+import com.elephant.wms.inventory.infrastructure.mapper.InventoryDetailMapper;
+import com.elephant.wms.inventory.infrastructure.po.InventoryDetailPO;
 import jakarta.annotation.Resource;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;

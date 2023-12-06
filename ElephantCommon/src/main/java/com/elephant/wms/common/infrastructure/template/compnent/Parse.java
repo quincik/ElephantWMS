@@ -1,4 +1,4 @@
-package com.elephant.wms.infrastructure.template.compnent;
+package com.elephant.wms.common.infrastructure.template.compnent;
 
 import com.alibaba.fastjson2.JSONObject;
 import org.apache.camel.Exchange;

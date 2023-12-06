@@ -1,8 +1,8 @@
-package com.elephant.wms.core.component.storage;
+package com.elephant.wms.basic.core.component.storage;
 
-import com.elephant.wms.infrastructure.mapper.StorageMapper;
-import com.elephant.wms.infrastructure.po.StoragePO;
-import com.elephant.wms.infrastructure.template.compnent.Creater;
+import com.elephant.wms.basic.infrastructure.mapper.StorageMapper;
+import com.elephant.wms.basic.infrastructure.po.StoragePO;
+import com.elephant.wms.common.infrastructure.template.compnent.Creater;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;

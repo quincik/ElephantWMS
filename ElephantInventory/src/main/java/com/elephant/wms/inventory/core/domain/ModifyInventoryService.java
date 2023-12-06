@@ -1,8 +1,8 @@
-package com.elephant.wms.core.domain;
+package com.elephant.wms.inventory.core.domain;
 
-import com.elephant.wms.core.bo.ModifyInventoryBO;
-import com.elephant.wms.infrastructure.object.Result;
-import com.elephant.wms.infrastructure.po.InventoryDetailPO;
+import com.elephant.wms.inventory.core.bo.ModifyInventoryBO;
+import com.elephant.wms.common.infrastructure.object.Result;
+import com.elephant.wms.inventory.infrastructure.po.InventoryDetailPO;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.springframework.stereotype.Service;

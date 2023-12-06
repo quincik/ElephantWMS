@@ -1,8 +1,8 @@
-package com.elephant.wms.core.component.owner;
+package com.elephant.wms.basic.core.component.owner;
 
-import com.elephant.wms.infrastructure.mapper.OwnerMapper;
-import com.elephant.wms.infrastructure.po.OwnerPO;
-import com.elephant.wms.infrastructure.template.compnent.Creater;
+import com.elephant.wms.basic.infrastructure.mapper.OwnerMapper;
+import com.elephant.wms.basic.infrastructure.po.OwnerPO;
+import com.elephant.wms.common.infrastructure.template.compnent.Creater;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;

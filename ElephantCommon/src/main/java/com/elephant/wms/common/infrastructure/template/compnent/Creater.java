@@ -1,7 +1,7 @@
-package com.elephant.wms.infrastructure.template.compnent;
+package com.elephant.wms.common.infrastructure.template.compnent;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.elephant.wms.infrastructure.object.Result;
+import com.elephant.wms.common.infrastructure.object.Result;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 

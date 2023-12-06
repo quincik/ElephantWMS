@@ -1,4 +1,4 @@
-package com.elephant.wms.infrastructure.po;
+package com.elephant.wms.basic.infrastructure.po;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;

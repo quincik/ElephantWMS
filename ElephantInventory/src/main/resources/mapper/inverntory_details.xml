@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.elephant.wms.infrastructure.mapper.InventoryDetailMapper">
+<mapper namespace="com.elephant.wms.inventory.infrastructure.mapper.InventoryDetailMapper">
 
     <!-- selectByName -->
     <update id="freezeInventory" >

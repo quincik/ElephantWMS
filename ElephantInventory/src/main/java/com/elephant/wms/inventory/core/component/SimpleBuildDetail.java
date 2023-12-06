@@ -1,9 +1,9 @@
-package com.elephant.wms.core.component;
+package com.elephant.wms.inventory.core.component;
 
-import com.elephant.wms.core.bo.ModifyInventoryBO;
-import com.elephant.wms.infrastructure.po.InventoryDetailPO;
-import com.elephant.wms.interfaces.service.ItemBatchService;
-import com.elephant.wms.interfaces.service.StorageService;
+import com.elephant.wms.inventory.core.bo.ModifyInventoryBO;
+import com.elephant.wms.inventory.infrastructure.po.InventoryDetailPO;
+import com.elephant.wms.basic.interfaces.service.ItemBatchService;
+import com.elephant.wms.basic.interfaces.service.StorageService;
 import jakarta.annotation.Resource;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -20,9 +20,9 @@ public class SimpleBuildDetail  implements Processor {
     @Resource
     StorageService storageService;
 
-    private  InventoryDetailPO getInventoryDetailPO(ModifyInventoryBO modify,
-                                                    Optional<ItemBatchService.ItemBatchDTO> itemBatch,
-                                                    Optional<StorageService.StorageDTO> storage) {
+    private InventoryDetailPO getInventoryDetailPO(ModifyInventoryBO modify,
+                                                   Optional<ItemBatchService.ItemBatchDTO> itemBatch,
+                                                   Optional<StorageService.StorageDTO> storage) {
         InventoryDetailPO entity = new InventoryDetailPO();
         entity.setItemBatch(itemBatch.get().getId());
         entity.setItemCode(itemBatch.get().getItemCode());
@@ -44,10 +44,18 @@ public class SimpleBuildDetail  implements Processor {
 
         ModifyInventoryBO modify = exchange.getMessage()
                 .getHeader("modify",ModifyInventoryBO.class);
-        Optional<ItemBatchService.ItemBatchDTO> itemBatch = itemBatchService.queryById(modify.getItemBatch());
-        if(itemBatch.isEmpty()) return;
-        Optional<StorageService.StorageDTO> storage = storageService.queryByCode(modify.getStorageCode());
-        if(storage.isEmpty()) return;
+
+        Optional<ItemBatchService.ItemBatchDTO> itemBatch = exchange.getMessage().getHeader("itemBatch",Optional.class);
+        if(null == itemBatch) {
+            itemBatch = itemBatchService.queryById(modify.getItemBatch());
+            if (itemBatch.isEmpty()) return;
+        }
+
+        Optional<StorageService.StorageDTO> storage = exchange.getMessage().getHeader("storage",Optional.class);
+        if(null == storage) {
+            storage = storageService.queryByCode(modify.getStorageCode());
+            if (storage.isEmpty()) return;
+        }
 
         InventoryDetailPO entity = getInventoryDetailPO(modify, itemBatch, storage);
         exchange.getMessage().setBody(entity);

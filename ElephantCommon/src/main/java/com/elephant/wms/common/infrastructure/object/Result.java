@@ -1,4 +1,4 @@
-package com.elephant.wms.infrastructure.object;
+package com.elephant.wms.common.infrastructure.object;
 
 import lombok.Data;
 

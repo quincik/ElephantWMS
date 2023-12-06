@@ -1,14 +1,10 @@
-package com.elephant.wms.interfaces.service.impl;
+package com.elephant.wms.basic.interfaces.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.elephant.wms.infrastructure.mapper.ItemBatchMapper;
-import com.elephant.wms.infrastructure.mapper.StorageMapper;
-import com.elephant.wms.infrastructure.po.ItemBatchPO;
-import com.elephant.wms.infrastructure.po.StoragePO;
-import com.elephant.wms.interfaces.service.ItemBatchService;
-import com.elephant.wms.interfaces.service.StorageService;
-import com.elephant.wms.interfaces.service.convert.ServiceConvert;
+import com.elephant.wms.basic.infrastructure.mapper.StorageMapper;
+import com.elephant.wms.basic.infrastructure.po.StoragePO;
+import com.elephant.wms.basic.interfaces.service.StorageService;
+import com.elephant.wms.basic.interfaces.service.convert.ServiceConvert;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 

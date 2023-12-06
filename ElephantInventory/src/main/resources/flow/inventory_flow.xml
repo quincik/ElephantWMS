@@ -5,24 +5,36 @@
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
     ">
     <!-- this is an included XML file where we only the routeContext -->
-    <routeContext  id="inventoryFlow" xmlns="http://camel.apache.org/schema/spring">
+    <routeContext id="inventoryFlow" xmlns="http://camel.apache.org/schema/spring">
+
         <route id="modifyInventory">
             <from uri="direct:modifyInventory"/>
-            <when>
-                <simple>${header.modify.operation} == ${type:com.elephant.wms.core.enums.InventoryOptEnum.ADJUST}</simple>
-                <process ref="simpleQueryDetail" />
+            <process ref="simpleVerificationIdempotent"/>
+            <when><simple>${header.idempotent} == false</simple>
                 <choice>
-                    <when>
-                        <simple>${body} != null</simple>
-                        <process ref="simpleModifyDetail"/>
+                    <when><simple>${header.modify.scenario.getCode()} == 10</simple>
+                        <process ref="receivingRule"/>
+                        <when><simple>${body.data} == true</simple>
+                            <to uri="direct:adjustInventory"/>
+                        </when>
                     </when>
-                    <otherwise>
-                        <process ref="simpleBuildDetail" />
-                        <process ref="simpleCreateDetail" />
-                    </otherwise>
                 </choice>
             </when>
-
         </route>
-    </routeContext >
+
+        <route id="adjustInventory">
+            <from uri="direct:adjustInventory"/>
+            <process ref="simpleQueryDetail"/>
+            <choice>
+                <when><simple>${body} != null</simple>
+                    <process ref="simpleModifyDetail"/>
+                </when>
+                <otherwise>
+                    <process ref="simpleBuildDetail"/>
+                    <process ref="simpleCreateDetail"/>
+                </otherwise>
+            </choice>
+        </route>
+
+    </routeContext>
 </beans>

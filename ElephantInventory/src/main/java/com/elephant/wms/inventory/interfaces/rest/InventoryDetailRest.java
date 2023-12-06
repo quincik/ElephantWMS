@@ -1,9 +1,11 @@
-package com.elephant.wms.interfaces.rest;
+package com.elephant.wms.inventory.interfaces.rest;
 
-import com.elephant.wms.core.bo.ModifyInventoryBO;
-import com.elephant.wms.core.domain.ModifyInventoryService;
-import com.elephant.wms.core.enums.OptEnum;
-import com.elephant.wms.infrastructure.object.Result;
+import com.elephant.wms.inventory.core.bo.ModifyInventoryBO;
+import com.elephant.wms.inventory.core.domain.ModifyInventoryService;
+import com.elephant.wms.inventory.core.enums.OptEnum;
+import com.elephant.wms.common.infrastructure.object.Result;
+import com.elephant.wms.inventory.core.enums.ScenarioEnum;
+import com.elephant.wms.inventory.interfaces.service.InventoryService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,20 +19,20 @@ import java.util.Map;
 public class InventoryDetailRest {
 
     @Resource
-    ModifyInventoryService modifyInventoryService;
+    InventoryService inventoryService;
 
     @PostMapping("/query")
     public Result<Boolean> query(@RequestBody Map<String, Object> param){
 
-        ModifyInventoryBO modify = new ModifyInventoryBO();
+        InventoryService.ModifyInventoryParam modify = new InventoryService.ModifyInventoryParam();
         modify.setAmount(1000);
         modify.setItemBatch(1l);
         modify.setStorageCode("A01-01-01");
-        modify.setOperation(OptEnum.ADJUST);
-        modify.setIdempotentKey("MD938489393");
+        modify.setIdempotentKey("MD938489395");
         modify.setReferenceCode("ASN202938493");
+        modify.setScenario(10);
 
-        modifyInventoryService.modifyInventory(modify);
+        inventoryService.modifyInventory(modify);
         return new Result<>();
     }
 

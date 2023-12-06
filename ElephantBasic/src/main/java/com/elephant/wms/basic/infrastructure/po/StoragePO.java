@@ -1,4 +1,4 @@
-package com.elephant.wms.infrastructure.po;
+package com.elephant.wms.basic.infrastructure.po;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -27,7 +27,7 @@ public class StoragePO {
     private Integer height;
     private Integer maxWeight;
     private Integer sortIndex;
-    private JsonNode extend;
+    private String extend;
 
 
 }

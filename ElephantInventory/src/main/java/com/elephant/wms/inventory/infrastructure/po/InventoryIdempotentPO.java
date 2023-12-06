@@ -7,8 +7,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
 
 @Data
-@TableName("inventory_freeze")
-public class InventoryFreezePO {
+@TableName("inventory_idempotent")
+public class InventoryIdempotentPO {
 
     @TableId
     private Long id;
@@ -18,12 +18,8 @@ public class InventoryFreezePO {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     private String modifyTime;
 
-    private Long detailId;
+    private Integer scenario;
+    private String keyword;
     private String referenceCode;
-    private Integer type;
-    private Integer requestQuantity;
-    private Integer usedQuantity;
-    private Integer status;
-    private String idempotentKey;
     private String extend;
 }

@@ -1,15 +1,14 @@
-package com.elephant.wms.interfaces.rest;
+package com.elephant.wms.basic.interfaces.rest;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.elephant.wms.infrastructure.mapper.AreaMapper;
-import com.elephant.wms.infrastructure.object.Result;
-import com.elephant.wms.infrastructure.po.AreaPO;
-import com.elephant.wms.infrastructure.template.rest.BasicRest;
-import com.elephant.wms.interfaces.rest.convert.RestConvert;
+import com.elephant.wms.common.infrastructure.template.rest.BasicRest;
+import com.elephant.wms.basic.interfaces.rest.convert.RestConvert;
+import com.elephant.wms.basic.infrastructure.mapper.AreaMapper;
+import com.elephant.wms.common.infrastructure.object.Result;
+import com.elephant.wms.basic.infrastructure.po.AreaPO;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.Data;
-import org.apache.camel.CamelContext;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.springframework.web.bind.annotation.PostMapping;

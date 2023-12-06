@@ -1,8 +1,8 @@
-package com.elephant.wms.interfaces.rest.convert;
+package com.elephant.wms.basic.interfaces.rest.convert;
 
 
-import com.elephant.wms.infrastructure.po.*;
-import com.elephant.wms.interfaces.rest.*;
+import com.elephant.wms.basic.infrastructure.po.*;
+import com.elephant.wms.basic.interfaces.rest.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
