@@ -10,7 +10,6 @@
         <route id="createReceiveNotice">
             <from uri="direct:createReceiveNotice"/>
             <process ref="simpleReceiveNoticeParse" />
-            <!-- verificationDimensionalArea or simpleAreaVerification -->
             <process ref="simpleReceiveNoticeVerification"/>
             <when>
                 <simple>${body.success} ==  true</simple>
@@ -22,7 +21,6 @@
         <route id="createReceiveOrder">
             <from uri="direct:createReceiveOrder"/>
             <process ref="simpleReceiveOrderParse" />
-            <!-- verificationDimensionalArea or simpleAreaVerification -->
             <process ref="simpleReceiveOrderVerification"/>
             <when>
                 <simple>${body.success} ==  true</simple>
@@ -34,7 +32,6 @@
         <route id="createReceiveNoticeDetail">
             <from uri="direct:createReceiveNoticeDetail"/>
             <process ref="simpleReceiveNoticeDetailParse" />
-            <!-- verificationDimensionalArea or simpleAreaVerification -->
             <process ref="simpleReceiveNoticeDetailVerification"/>
             <when>
                 <simple>${body.success} ==  true</simple>
