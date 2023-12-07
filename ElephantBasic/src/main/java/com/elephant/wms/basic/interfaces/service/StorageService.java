@@ -9,9 +9,7 @@ public interface StorageService {
 
     @Data
     public static class StorageDTO{
-        private Long id;
-        private String createTime;
-        private String modifyTime;
+
         private String code;
         private Integer status;
         private Integer type;

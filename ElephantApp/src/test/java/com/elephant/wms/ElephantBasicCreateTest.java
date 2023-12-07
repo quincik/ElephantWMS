@@ -26,11 +26,10 @@ import java.util.Random;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import java.time.format.DateTimeFormatter;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ElephantAppTest {
+class ElephantBasicCreateTest {
 
     @Autowired
     private MockMvc mockMvc;

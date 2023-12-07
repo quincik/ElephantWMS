@@ -6,7 +6,9 @@ import lombok.Data;
 @Data
 @TableName("receive_notice_detail_relation")
 public class ReceiveNoticeDetailRelationPO {
+
     private Long id;
     private Long receiveNoticeDetailId;
     private Long receiveOrderDetailId;
+    private Integer quantity;
 }

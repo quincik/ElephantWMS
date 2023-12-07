@@ -33,7 +33,7 @@ public class ReceiveNoticeRest extends BasicRest {
     public Result<Boolean> create(@RequestBody Map<String, Object> param){
 
         Result<Boolean> result = (Result<Boolean>)
-                producerTemplate.requestBody("direct:createItem", param);
+                producerTemplate.requestBody("direct:createReceiveNotice", param);
         return result;
     }
 }

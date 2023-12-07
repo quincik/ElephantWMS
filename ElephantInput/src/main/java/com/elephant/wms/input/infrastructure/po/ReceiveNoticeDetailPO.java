@@ -7,10 +7,8 @@ import lombok.Data;
 @TableName("receive_notice_detail")
 public class ReceiveNoticeDetailPO {
     private Long id;
-    private Long receiveNoticeId;
     private String receiveNoticeCode;
     private String ownerCode;
-    private Long itemBatch;
     private String itemCode;
     private Integer quantity;
     private Integer actualQuantity;

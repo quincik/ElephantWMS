@@ -14,6 +14,7 @@
             <process ref="simpleReceiveNoticeVerification"/>
             <when>
                 <simple>${body.success} ==  true</simple>
+                <process ref="simpleReceiveNoticeBuild"/>
                 <process ref="simpleReceiveNoticeCreate"/>
             </when>
         </route>
