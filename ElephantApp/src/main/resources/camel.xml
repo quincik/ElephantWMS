@@ -6,8 +6,10 @@
 
     <import resource="/flow/basic_flow.xml"/>
     <import resource="/flow/inventory_flow.xml"/>
+    <import resource="/flow/receive_flow.xml"/>
     <camelContext id="elephantWMS" xmlns="http://camel.apache.org/schema/spring">
         <routeContextRef ref="basicFlow"/>
         <routeContextRef ref="inventoryFlow"/>
+        <routeContextRef ref="receiveFlow"/>
     </camelContext>
 </beans>

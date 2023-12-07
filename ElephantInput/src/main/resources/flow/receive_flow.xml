@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+    ">
+    <!-- this is an included XML file where we only the routeContext -->
+    <routeContext  id="receiveFlow"  xmlns="http://camel.apache.org/schema/spring">
+        <!-- we can have a route -->
+        <route id="createReceiveNotice">
+            <from uri="direct:createReceiveNotice"/>
+            <process ref="simpleReceiveNoticeParse" />
+            <!-- verificationDimensionalArea or simpleAreaVerification -->
+            <process ref="simpleReceiveNoticeVerification"/>
+            <when>
+                <simple>${body.success} ==  true</simple>
+                <process ref="simpleReceiveNoticeCreate"/>
+            </when>
+        </route>
+
+        <route id="createReceiveNoticeDetail">
+            <from uri="direct:createReceiveNoticeDetail"/>
+            <process ref="simpleReceiveNoticeDetailParse" />
+            <!-- verificationDimensionalArea or simpleAreaVerification -->
+            <process ref="simpleReceiveNoticeDetailVerification"/>
+            <when>
+                <simple>${body.success} ==  true</simple>
+                <process ref="simpleReceiveNoticeDetailCreate"/>
+            </when>
+        </route>
+    </routeContext>
+</beans>

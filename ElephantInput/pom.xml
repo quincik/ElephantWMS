@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>ElephantInput</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -17,4 +18,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.elephant.wms</groupId>
+            <artifactId>ElephantInventory</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

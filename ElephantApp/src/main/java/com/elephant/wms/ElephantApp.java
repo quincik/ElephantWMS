@@ -6,7 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@MapperScan({"com.elephant.wms.basic.infrastructure.mapper","com.elephant.wms.inventory.infrastructure.mapper"})
+@MapperScan({"com.elephant.wms.basic.infrastructure.mapper",
+        "com.elephant.wms.inventory.infrastructure.mapper",
+        "com.elephant.wms.input.infrastructure.mapper"
+})
 @ImportResource(locations = {"classpath:camel.xml","classpath:/mapper/*.xml"})
 public class ElephantApp {
 

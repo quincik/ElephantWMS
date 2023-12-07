@@ -24,12 +24,7 @@
     <dependencies>
         <dependency>
             <groupId>com.elephant.wms</groupId>
-            <artifactId>ElephantBasic</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.elephant.wms</groupId>
-            <artifactId>ElephantInventory</artifactId>
+            <artifactId>ElephantInput</artifactId>
             <version>${project.version}</version>
         </dependency>
 
