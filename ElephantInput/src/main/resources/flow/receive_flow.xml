@@ -19,6 +19,18 @@
             </when>
         </route>
 
+        <route id="createReceiveOrder">
+            <from uri="direct:createReceiveOrder"/>
+            <process ref="simpleReceiveOrderParse" />
+            <!-- verificationDimensionalArea or simpleAreaVerification -->
+            <process ref="simpleReceiveOrderVerification"/>
+            <when>
+                <simple>${body.success} ==  true</simple>
+                <process ref="simpleReceiveOrderBuild"/>
+                <process ref="simpleReceiveOrderCreate"/>
+            </when>
+        </route>
+
         <route id="createReceiveNoticeDetail">
             <from uri="direct:createReceiveNoticeDetail"/>
             <process ref="simpleReceiveNoticeDetailParse" />

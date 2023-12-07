@@ -19,7 +19,7 @@ public class SimpleReceiveNoticeVerification implements Processor {
     @Resource
     OwnerService ownerService;
 
-    public @Nonnull List<String> verified(ReceiveNoticePO entity,Exchange exchange) {
+    protected @Nonnull List<String> verified(ReceiveNoticePO entity,Exchange exchange) {
         List<String> result = new LinkedList<>();
         if(null == entity.getOwnerCode() || entity.getOwnerCode().isEmpty()){
             result.add("[命中收货通知规则]货主编码为空。");

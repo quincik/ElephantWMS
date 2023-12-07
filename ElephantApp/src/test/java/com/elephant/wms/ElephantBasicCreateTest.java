@@ -65,7 +65,7 @@ class ElephantBasicCreateTest {
         Map<String, Object> param  = new LinkedHashMap<>();
         param.put("code","TestS" + randomNum + "-" +areaPO.getCode() );
         param.put("areaCode",areaPO.getCode());
-        param.put("type",1);
+        param.put("type",areaPO.getType());
 
         mockMvc.perform(
                         post("/storage/create").content(JSON.toJSONString(param))

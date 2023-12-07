@@ -36,7 +36,7 @@ public class SimpleReceiveNoticeDetailVerification implements Processor {
     @Resource
     ItemService itemService;
 
-    public @Nonnull List<String> verified(ReceiveNoticeDetailPO entity,Exchange exchange) {
+    protected @Nonnull List<String> verified(ReceiveNoticeDetailPO entity,Exchange exchange) {
 
         List<String> result = new LinkedList<>();
 

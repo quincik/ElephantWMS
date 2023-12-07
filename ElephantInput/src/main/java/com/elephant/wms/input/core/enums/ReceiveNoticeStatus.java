@@ -5,7 +5,7 @@ import lombok.Getter;
 
 public enum ReceiveNoticeStatus {
 
-    CREATE(0, "通知创建");
+    CREATE(0, "创建");
 
     @Getter
     private Integer code;

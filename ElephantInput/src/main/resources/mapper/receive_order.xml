@@ -1,0 +1,14 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elephant.wms.input.infrastructure.mapper.ReceiveOrderMapper">
+
+    <insert id="insertCondition" parameterType="com.elephant.wms.input.infrastructure.po.ReceiveOrderPO">
+        INSERT INTO receive_order (storage_code, operator_id,code)
+        SELECT #{order.storageCode,jdbcType=VARCHAR}, #{order.operatorId,jdbcType=BIT}, #{order.code,jdbcType=VARCHAR}
+        FROM DUAL WHERE NOT EXISTS (
+            SELECT id FROM  receive_order WHERE storage_code = #{order.storageCode,jdbcType=VARCHAR} and status != 20
+        )
+    </insert>
+
+</mapper>

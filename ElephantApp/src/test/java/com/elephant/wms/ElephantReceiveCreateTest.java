@@ -1,12 +1,15 @@
 package com.elephant.wms;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.elephant.wms.basic.infrastructure.mapper.ItemMapper;
 import com.elephant.wms.basic.infrastructure.mapper.OwnerMapper;
+import com.elephant.wms.basic.infrastructure.mapper.StorageMapper;
 import com.elephant.wms.basic.infrastructure.po.ItemBatchPO;
 import com.elephant.wms.basic.infrastructure.po.ItemPO;
 import com.elephant.wms.basic.infrastructure.po.OwnerPO;
+import com.elephant.wms.basic.infrastructure.po.StoragePO;
 import com.elephant.wms.input.core.enums.ReceiveNoticeStatus;
 import com.elephant.wms.input.infrastructure.mapper.ReceiveNoticeMapper;
 import com.elephant.wms.input.infrastructure.po.ReceiveNoticePO;
@@ -43,6 +46,9 @@ public class ElephantReceiveCreateTest {
     ItemMapper itemMapper;
 
     @Resource
+    StorageMapper storageMapper;
+
+    @Resource
     private ReceiveNoticeMapper receiveNoticeMapper;
 
     @RepeatedTest(2)
@@ -67,6 +73,29 @@ public class ElephantReceiveCreateTest {
 
         mockMvc.perform(
                         post("/receive/notice/create").content(JSON.toJSONString(param))
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").isBoolean());
+    }
+
+    @RepeatedTest(1)
+    public void createReceiveOrder() throws Exception {
+
+        Random random = new Random();
+
+        QueryWrapper<StoragePO> queryStoragePO = new QueryWrapper<>();
+        queryStoragePO.last("limit 10");
+        List<StoragePO> listStoragePO = storageMapper.selectList(queryStoragePO);
+        StoragePO storagePO = listStoragePO.get(random.nextInt(listStoragePO.size()));
+
+        Map<String, Object> param  = new LinkedHashMap<>();
+        param.put("storageCode",storagePO.getCode() );
+        param.put("operatorId",1l);
+
+        mockMvc.perform(
+                        post("/receive/order/create").content(JSON.toJSONString(param))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON)
                 )
