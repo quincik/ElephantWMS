@@ -3,6 +3,7 @@ package com.elephant.wms.input.core.component.notice;
 import com.elephant.wms.basic.interfaces.service.OwnerService;
 import com.elephant.wms.common.infrastructure.template.compnent.SingerBuild;
 import com.elephant.wms.input.infrastructure.po.ReceiveNoticePO;
+import jakarta.annotation.Nonnull;
 import org.apache.camel.Exchange;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,7 @@ import java.util.Random;
 @Component
 public class SimpleReceiveNoticeBuild extends SingerBuild<ReceiveNoticePO> {
 
-    private static String generateCode() {
+    protected @Nonnull String generateCodeExt() {
         // 格式化日期时间
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String formattedDate = dateFormat.format(new Date());
@@ -37,7 +38,7 @@ public class SimpleReceiveNoticeBuild extends SingerBuild<ReceiveNoticePO> {
 
     @Override
     protected ReceiveNoticePO build(ReceiveNoticePO entity, Exchange exchange) {
-        entity.setCode(generateCode());
+        entity.setCode(generateCodeExt());
         buildPhoneExt(entity,exchange);
         return entity;
     }

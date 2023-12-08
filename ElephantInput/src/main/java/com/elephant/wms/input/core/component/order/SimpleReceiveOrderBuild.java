@@ -2,6 +2,7 @@ package com.elephant.wms.input.core.component.order;
 
 import com.elephant.wms.common.infrastructure.template.compnent.SingerBuild;
 import com.elephant.wms.input.infrastructure.po.ReceiveOrderPO;
+import jakarta.annotation.Nonnull;
 import org.apache.camel.Exchange;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ import java.util.Random;
 @Component
 public class SimpleReceiveOrderBuild extends SingerBuild<ReceiveOrderPO> {
 
-    private static String generateCode() {
+    protected @Nonnull String generateCodeExt() {
         // 格式化日期时间
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String formattedDate = dateFormat.format(new Date());
@@ -27,7 +28,7 @@ public class SimpleReceiveOrderBuild extends SingerBuild<ReceiveOrderPO> {
 
     @Override
     protected ReceiveOrderPO build(ReceiveOrderPO entity, Exchange exchange) {
-        entity.setCode(generateCode());
+        entity.setCode(generateCodeExt());
         return entity;
     }
 }
