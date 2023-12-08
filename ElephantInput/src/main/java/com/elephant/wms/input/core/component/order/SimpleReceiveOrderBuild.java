@@ -1,20 +1,16 @@
 package com.elephant.wms.input.core.component.order;
 
-import com.elephant.wms.basic.interfaces.service.OwnerService;
-import com.elephant.wms.common.infrastructure.object.Result;
-import com.elephant.wms.input.infrastructure.po.ReceiveNoticePO;
+import com.elephant.wms.common.infrastructure.template.compnent.SingerBuild;
 import com.elephant.wms.input.infrastructure.po.ReceiveOrderPO;
 import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Optional;
 import java.util.Random;
 
 @Component
-public class SimpleReceiveOrderBuild implements Processor {
+public class SimpleReceiveOrderBuild extends SingerBuild<ReceiveOrderPO> {
 
     private static String generateCode() {
         // 格式化日期时间
@@ -30,14 +26,8 @@ public class SimpleReceiveOrderBuild implements Processor {
     }
 
     @Override
-    public void process(Exchange exchange) throws Exception {
-
-        ReceiveOrderPO entity =
-                (ReceiveOrderPO) exchange.getMessage()
-                        .getBody(Result.class).getData();
-
+    protected ReceiveOrderPO build(ReceiveOrderPO entity, Exchange exchange) {
         entity.setCode(generateCode());
-        exchange.getMessage().setBody(entity);
-
+        return entity;
     }
 }

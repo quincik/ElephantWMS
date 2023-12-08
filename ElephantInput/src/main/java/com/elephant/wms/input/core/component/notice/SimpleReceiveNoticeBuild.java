@@ -1,21 +1,18 @@
 package com.elephant.wms.input.core.component.notice;
 
 import com.elephant.wms.basic.interfaces.service.OwnerService;
-import com.elephant.wms.basic.interfaces.service.StorageService;
-import com.elephant.wms.common.infrastructure.object.Result;
+import com.elephant.wms.common.infrastructure.template.compnent.SingerBuild;
 import com.elephant.wms.input.infrastructure.po.ReceiveNoticePO;
 import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
 @Component
-public class SimpleReceiveNoticeBuild  implements Processor {
+public class SimpleReceiveNoticeBuild extends SingerBuild<ReceiveNoticePO> {
 
     private static String generateCode() {
         // 格式化日期时间
@@ -30,22 +27,19 @@ public class SimpleReceiveNoticeBuild  implements Processor {
         return "ASN" + formattedDate + randomNumber;
     }
 
-    @Override
-    public void process(Exchange exchange) throws Exception {
-
-        ReceiveNoticePO entity =
-                (ReceiveNoticePO) exchange.getMessage()
-                        .getBody(Result.class).getData();
-
-        entity.setCode(generateCode());
-
+    protected void buildPhoneExt(ReceiveNoticePO entity, Exchange exchange){
         Optional<OwnerService.OwnerDTO> owner = exchange.getMessage()
                 .getHeader("owner",Optional.class);
         if(null == entity.getContactsPhone() || entity.getContactsPhone().isEmpty()){
             entity.setContactsPhone(owner.get().getContactsPhone());
         }
-
-        exchange.getMessage().setBody(entity);
-
     }
+
+    @Override
+    protected ReceiveNoticePO build(ReceiveNoticePO entity, Exchange exchange) {
+        entity.setCode(generateCode());
+        buildPhoneExt(entity,exchange);
+        return entity;
+    }
+
 }

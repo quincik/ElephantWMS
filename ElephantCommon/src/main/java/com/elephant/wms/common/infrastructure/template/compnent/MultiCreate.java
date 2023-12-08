@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public abstract class Creater<T> implements Processor {
+public abstract class MultiCreate<T> implements Processor {
 
     protected abstract BaseMapper getMapper();
     @Override

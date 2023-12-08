@@ -1,4 +1,4 @@
-package com.elephant.wms.config;
+package com.elephant.app.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;

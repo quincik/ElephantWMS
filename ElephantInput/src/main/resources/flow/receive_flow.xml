@@ -38,5 +38,16 @@
                 <process ref="simpleReceiveNoticeDetailCreate"/>
             </when>
         </route>
+
+        <route id="createReceiveOrderDetail">
+            <from uri="direct:createReceiveOrderDetail"/>
+            <process ref="simpleReceiveOrderDetailParse" />
+            <process ref="simpleReceiveOrderDetailVerification"/>
+            <when>
+                <simple>${body.success} ==  true</simple>
+                <process ref="simpleReceiveOrderDetailBuild"/>
+                <process ref="simpleReceiveOrderDetailCreate"/>
+            </when>
+        </route>
     </routeContext>
 </beans>

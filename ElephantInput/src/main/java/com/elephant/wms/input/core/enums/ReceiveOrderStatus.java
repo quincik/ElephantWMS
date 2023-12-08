@@ -4,7 +4,7 @@ import lombok.Getter;
 
 public enum ReceiveOrderStatus {
 
-    CREATE(0, "创建"),COMPLETE(20,"完成");
+    CREATE(0, "创建"),RECEIVING(10,"收货中"),COMPLETE(20,"完成");
 
     @Getter
     private Integer code;

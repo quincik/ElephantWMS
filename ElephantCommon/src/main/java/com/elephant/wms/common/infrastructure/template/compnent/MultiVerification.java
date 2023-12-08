@@ -8,7 +8,7 @@ import org.apache.camel.Processor;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class Verification<T> implements Processor{
+public abstract class MultiVerification<T> implements Processor{
 
     /**
      * @param entity

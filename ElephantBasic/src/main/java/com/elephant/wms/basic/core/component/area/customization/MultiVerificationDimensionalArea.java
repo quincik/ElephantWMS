@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class VerificationDimensionalArea extends SimpleAreaVerification {
+public class MultiVerificationDimensionalArea extends SimpleAreaVerification {
 
     @Override
     public @Nonnull List<String> verified(AreaPO entity) {

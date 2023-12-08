@@ -1,4 +1,4 @@
-package com.elephant.wms;
+package com.elephant.app;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -7,7 +7,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+        "com.elephant.wms.basic.interfaces",
+        "com.elephant.wms.basic.core.component",
+        "com.elephant.wms.input.interfaces",
+        "com.elephant.wms.input.core.component",
+        "com.elephant.wms.input.core.domain",
+        "com.elephant.wms.inventory.interfaces",
+        "com.elephant.wms.inventory.core.component",
+    }
+)
 @MapperScan({
         "com.elephant.wms.basic.infrastructure.mapper",
         "com.elephant.wms.inventory.infrastructure.mapper",

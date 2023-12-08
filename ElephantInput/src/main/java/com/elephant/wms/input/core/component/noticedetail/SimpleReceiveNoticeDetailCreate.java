@@ -1,10 +1,7 @@
 package com.elephant.wms.input.core.component.noticedetail;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.elephant.wms.common.infrastructure.object.Result;
-import com.elephant.wms.common.infrastructure.template.compnent.Creater;
 import com.elephant.wms.input.core.enums.ReceiveNoticeStatus;
 import com.elephant.wms.input.infrastructure.mapper.ReceiveNoticeDetailMapper;
 import com.elephant.wms.input.infrastructure.mapper.ReceiveNoticeMapper;
@@ -15,8 +12,6 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Component
 public class SimpleReceiveNoticeDetailCreate implements Processor {

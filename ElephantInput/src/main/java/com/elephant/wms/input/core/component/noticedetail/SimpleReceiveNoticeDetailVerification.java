@@ -1,12 +1,8 @@
 package com.elephant.wms.input.core.component.noticedetail;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.elephant.wms.basic.infrastructure.mapper.ItemMapper;
 import com.elephant.wms.basic.interfaces.service.ItemService;
-import com.elephant.wms.basic.interfaces.service.OwnerService;
 import com.elephant.wms.common.infrastructure.object.Result;
-import com.elephant.wms.common.infrastructure.template.compnent.Verification;
 import com.elephant.wms.input.core.enums.ReceiveNoticeStatus;
 import com.elephant.wms.input.infrastructure.mapper.ReceiveNoticeDetailMapper;
 import com.elephant.wms.input.infrastructure.mapper.ReceiveNoticeMapper;
@@ -16,13 +12,11 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Resource;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Queue;
 
 @Component
 public class SimpleReceiveNoticeDetailVerification implements Processor {

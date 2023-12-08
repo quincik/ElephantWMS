@@ -19,8 +19,9 @@ public class ReceiveOrderDetailPO {
     private Long itemBatchId;
     private Integer actualQuantity;
     private Integer status;
-    private String extend; // JSON 数据可以使用 Map 存储
+    private String extend;
     private String createdTime;
     private String modifiedTime;
+    private Integer standard;
 
 }

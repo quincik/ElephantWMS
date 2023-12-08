@@ -25,6 +25,6 @@ public class ItemServiceImpl implements ItemService {
         query.eq("code",code);
         query.eq("owner_code",ownerCode);
         ItemPO itemPO = itemMapper.selectOne(query);
-         return Optional.ofNullable(ServiceConvert.INSTANCE.toItemDTO(itemPO));
+        return Optional.ofNullable(ServiceConvert.INSTANCE.toItemDTO(itemPO));
     }
 }

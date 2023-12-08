@@ -1,6 +1,6 @@
 package com.elephant.wms.basic.core.component.storage;
 
-import com.elephant.wms.common.infrastructure.template.compnent.Verification;
+import com.elephant.wms.common.infrastructure.template.compnent.MultiVerification;
 import com.elephant.wms.basic.infrastructure.po.StoragePO;
 import jakarta.annotation.Nonnull;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Component
-public class SimpleStorageVerification extends Verification<StoragePO> {
+public class SimpleStorageVerification extends MultiVerification<StoragePO> {
     @Override
     public @Nonnull List<String> verified(StoragePO entity) {
         List<String> result = new LinkedList<>();
