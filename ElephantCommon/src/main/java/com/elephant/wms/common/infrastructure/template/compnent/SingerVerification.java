@@ -12,15 +12,48 @@ public abstract class SingerVerification<T> implements Processor {
 
     protected abstract Class<T> getType();
 
-    protected abstract  @Nonnull List<String> verified(T entity,Exchange exchange);
+    /**
+     * 用于 Entity 信息的必填校验
+     * @param entity
+     * @return
+     */
+    protected abstract @Nonnull List<String> verifiedEntityExt(@Nonnull T entity);
 
-    protected abstract @Nonnull List<String> verifiedEntity(T entity);
+    /**
+     * 用于对应具体 verified 业务要求校验
+     * 具体 verified 主要逻辑实现
+     * @param entity
+     * @param exchange
+     * @return
+     */
+    protected abstract @Nonnull List<String> verifiedExt(@Nonnull T entity,Exchange exchange);
 
-    protected static void verifiedExt(List<String> errors,String error){
+    private @Nonnull List<String> verified(T entity,Exchange exchange){
+        List<String> result = verifiedEntityExt(entity);
+        if( ! result.isEmpty() ) return result;
+        result.addAll(verifiedExt(entity,exchange));
+        return result;
+    };
+
+    /**
+     * 工具函数 用于追加 verified 错误信息
+     * @param errors
+     * @param error
+     */
+    protected static void appendError(List<String> errors,String error){
         if(!error.isEmpty()) errors.add(error);
     }
+    protected static void appendError(List<String> errors,List<String> error){
+        if(!error.isEmpty()) errors.addAll(error);
+    }
 
-    protected static String isEmpty(Optional optional,String error){
+    /**
+     * 工具函数 用于做 Optional 空对象错误信息追加
+     * @param optional
+     * @param error
+     * @return
+     */
+    protected static String emptyError(Optional optional,String error){
         if(optional.isEmpty()) return error;
         return "";
     }

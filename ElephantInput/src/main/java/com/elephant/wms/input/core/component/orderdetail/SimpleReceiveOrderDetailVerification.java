@@ -24,13 +24,18 @@ public class SimpleReceiveOrderDetailVerification extends SingerVerification<Rec
     @Resource
     ItemService itemService;
 
-    protected @Nonnull String verifiedOwnerExt(ReceiveOrderPO order,
+    protected @Nonnull List<String> verifiedOrderDetailRefExt(ReceiveOrderPO order,
                                                ReceiveOrderDetailPO detail){
+        List<String> result = new LinkedList<>();
         if( null != order.getOwnerCode() &&
                 !order.getOwnerCode().equals(detail.getOwnerCode()) ){
-            return IN01B111001.getDesc();
+            result.add(IN01B111001.getDesc());
         }
-        return Strings.EMPTY;
+        if( null != order.getStandard() &&
+                !order.getStandard().equals(detail.getStandard()) ){
+            result.add(IN01B111004.getDesc());
+        }
+        return result;
     }
 
     protected @Nonnull String verifiedOrderExt(ReceiveOrderPO order){
@@ -48,7 +53,8 @@ public class SimpleReceiveOrderDetailVerification extends SingerVerification<Rec
      * @param entity
      * @return
      */
-    protected @Nonnull List<String> verifiedEntity(ReceiveOrderDetailPO entity){
+    @Override
+    protected @Nonnull List<String> verifiedEntityExt(ReceiveOrderDetailPO entity){
 
         List<String> result = new LinkedList<>();
         if(null == entity.getActualQuantity() || entity.getActualQuantity() < 1){
@@ -57,21 +63,21 @@ public class SimpleReceiveOrderDetailVerification extends SingerVerification<Rec
         return result;
     }
 
+    @Nonnull
+    @Override
+    protected List<String> verifiedExt(ReceiveOrderDetailPO entity, Exchange exchange) {
 
-    protected @Nonnull List<String> verified(ReceiveOrderDetailPO entity, Exchange exchange) {
-
-        List<String> result = verifiedEntity(entity);
+        List<String> result = new LinkedList<>();
 
         ReceiveOrderPO receiveOrderPO = ReceiveBasicQuery.getOrder(entity.getReceiveOrderCode());
-        verifiedExt(result,verifiedOrderExt(receiveOrderPO));
+        appendError(result,verifiedOrderExt(receiveOrderPO));
         exchange.getMessage().setHeader("receiveOrder",receiveOrderPO);
 
-        verifiedExt(result,verifiedOwnerExt(receiveOrderPO,entity));
+        appendError(result,verifiedOrderDetailRefExt(receiveOrderPO,entity));
 
         Optional<ItemService.ItemDTO> itemDTO =
                 itemService.queryByCode(entity.getItemCode(),entity.getOwnerCode());
-        verifiedExt(result, isEmpty(itemDTO,IN00B0000001.getDesc()));
-
+        appendError(result, emptyError(itemDTO,IN00B0000001.getDesc()));
         return result;
     }
 

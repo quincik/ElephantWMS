@@ -2,58 +2,53 @@ package com.elephant.wms.input.core.component.notice;
 
 import com.elephant.wms.basic.interfaces.service.OwnerService;
 import com.elephant.wms.common.infrastructure.object.Result;
+import com.elephant.wms.common.infrastructure.template.compnent.SingerVerification;
 import com.elephant.wms.input.infrastructure.po.ReceiveNoticePO;
+import com.elephant.wms.input.infrastructure.po.ReceiveOrderDetailPO;
+import com.elephant.wms.input.infrastructure.po.ReceiveOrderPO;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Resource;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.elephant.wms.common.infrastructure.enums.INPUT_ERROR.*;
+
 @Component
-public class SimpleReceiveNoticeVerification implements Processor {
+public class SimpleReceiveNoticeVerification extends SingerVerification<ReceiveNoticePO> {
 
     @Resource
     OwnerService ownerService;
 
-    protected @Nonnull List<String> verified(ReceiveNoticePO entity,Exchange exchange) {
+    @Override
+    protected Class<ReceiveNoticePO> getType() {
+        return ReceiveNoticePO.class;
+    }
+
+    @Override
+    protected @Nonnull List<String> verifiedEntityExt(ReceiveNoticePO entity) {
         List<String> result = new LinkedList<>();
         if(null == entity.getOwnerCode() || entity.getOwnerCode().isEmpty()){
-            result.add("[命中收货通知规则]货主编码为空。");
+            result.add(IN00B0000002.getDesc());
         }
-
-        if(result.isEmpty() ){
-            Optional<OwnerService.OwnerDTO> ownerDTO = ownerService.queryByCode(entity.getOwnerCode());
-            if(!ownerDTO.isPresent()) {
-                result.add("[命中收货通知规则]货主编码有误。");
-            }else {
-                exchange.getMessage().setHeader("owner",ownerDTO);
-            }
-        }
-
         return result;
     }
 
-    public void  process(Exchange exchange) throws Exception {
+    @Nonnull
+    @Override
+    protected List<String> verifiedExt(ReceiveNoticePO entity, Exchange exchange) {
 
-        ReceiveNoticePO entity = exchange.getMessage().getBody(ReceiveNoticePO.class);
+        List<String> result = new LinkedList<>();
+        Optional<OwnerService.OwnerDTO> ownerDTO = ownerService.queryByCode(entity.getOwnerCode());
+        appendError(result, emptyError(ownerDTO,IN00B0000003.getDesc()));
+        exchange.getMessage().setHeader("owner",ownerDTO);
 
-        if(null == entity){
-            exchange.getMessage().setBody(new Result<>(false, "[命中收货通知规则]收货通知信息为空"));
-            return;
-        }
-
-        List<String> errors = verified(entity,exchange);
-
-        if(errors.isEmpty()) {
-            exchange.getMessage().setBody( new Result<>(entity));
-            return;
-        }
-
-        exchange.getMessage().setBody( new Result<>(false,errors));
+        return result;
     }
 
 }

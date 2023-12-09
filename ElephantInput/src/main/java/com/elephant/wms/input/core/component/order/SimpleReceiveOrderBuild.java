@@ -27,7 +27,7 @@ public class SimpleReceiveOrderBuild extends SingerBuild<ReceiveOrderPO> {
     }
 
     @Override
-    protected ReceiveOrderPO build(ReceiveOrderPO entity, Exchange exchange) {
+    protected ReceiveOrderPO buildExt(ReceiveOrderPO entity, Exchange exchange) {
         entity.setCode(generateCodeExt());
         return entity;
     }

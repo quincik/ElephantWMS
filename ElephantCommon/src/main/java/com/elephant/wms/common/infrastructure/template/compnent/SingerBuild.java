@@ -6,13 +6,13 @@ import org.apache.camel.Processor;
 
 public abstract class SingerBuild<T>  implements Processor {
 
-    protected abstract T build(T entity,Exchange exchange);
+    protected abstract T buildExt(T entity,Exchange exchange);
 
     @Override
     public void process(Exchange exchange) throws Exception {
         T entity =
                 (T) exchange.getMessage().getBody(Result.class).getData();
-        exchange.getMessage().setBody(build(entity,exchange));
+        exchange.getMessage().setBody(buildExt(entity,exchange));
     }
 
 }

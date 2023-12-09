@@ -12,10 +12,10 @@ import static com.elephant.wms.input.core.enums.ReceiveOrderStatus.RECEIVING;
 @Component
 public class SimpleReceiveOrderDetailBuild extends SingerBuild<ReceiveOrderDetailPO> {
 
-    protected Boolean supportUpdateStandard(){
+    protected Boolean needUpdateOrderStandard(){
         return true;
     }
-    protected Boolean supportUpdateOwner(){
+    protected Boolean needUpdateOrderOwner(){
         return true;
     }
 
@@ -25,9 +25,9 @@ public class SimpleReceiveOrderDetailBuild extends SingerBuild<ReceiveOrderDetai
                 .getHeader("receiveOrder", ReceiveOrderPO.class);
         ReceiveOrderDetailPO updateOrder = new ReceiveOrderDetailPO();
         updateOrder.setActualQuantity(receiveOrder.getActualQuantity() + entity.getActualQuantity());
-        if(supportUpdateStandard())
+        if(needUpdateOrderStandard())
             updateOrder.setStandard(entity.getStandard());
-        if (supportUpdateOwner())
+        if (needUpdateOrderOwner())
             updateOrder.setOwnerCode(entity.getOwnerCode());
         if(receiveOrder.getStatus() == ReceiveOrderStatus.CREATE.getCode())
             updateOrder.setStatus(RECEIVING.getCode());
@@ -35,7 +35,7 @@ public class SimpleReceiveOrderDetailBuild extends SingerBuild<ReceiveOrderDetai
     }
 
     @Override
-    protected ReceiveOrderDetailPO build(ReceiveOrderDetailPO entity,Exchange exchange){
+    protected ReceiveOrderDetailPO buildExt(ReceiveOrderDetailPO entity,Exchange exchange){
         //TODO detail status
         buildUpdateOrderExt(entity,exchange);
         return entity;

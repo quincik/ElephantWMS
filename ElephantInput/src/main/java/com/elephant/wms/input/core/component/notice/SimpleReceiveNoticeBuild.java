@@ -37,7 +37,7 @@ public class SimpleReceiveNoticeBuild extends SingerBuild<ReceiveNoticePO> {
     }
 
     @Override
-    protected ReceiveNoticePO build(ReceiveNoticePO entity, Exchange exchange) {
+    protected ReceiveNoticePO buildExt(ReceiveNoticePO entity, Exchange exchange) {
         entity.setCode(generateCodeExt());
         buildPhoneExt(entity,exchange);
         return entity;
