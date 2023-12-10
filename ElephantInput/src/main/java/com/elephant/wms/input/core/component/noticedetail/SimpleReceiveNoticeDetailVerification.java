@@ -3,6 +3,7 @@ package com.elephant.wms.input.core.component.noticedetail;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.elephant.wms.basic.interfaces.service.ItemService;
 import com.elephant.wms.common.infrastructure.object.Result;
+import com.elephant.wms.common.infrastructure.template.compnent.SingerVerification;
 import com.elephant.wms.input.core.enums.ReceiveNoticeStatus;
 import com.elephant.wms.input.infrastructure.mapper.ReceiveNoticeDetailMapper;
 import com.elephant.wms.input.infrastructure.mapper.ReceiveNoticeMapper;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class SimpleReceiveNoticeDetailVerification implements Processor {
+public class SimpleReceiveNoticeDetailVerification extends SingerVerification<ReceiveNoticeDetailPO> {
 
     @Resource
     ReceiveNoticeMapper receiveNoticeMapper;
@@ -30,13 +31,29 @@ public class SimpleReceiveNoticeDetailVerification implements Processor {
     @Resource
     ItemService itemService;
 
-    protected @Nonnull List<String> verified(ReceiveNoticeDetailPO entity,Exchange exchange) {
+    @Override
+    protected Class<ReceiveNoticeDetailPO> getType() {
+        return ReceiveNoticeDetailPO.class;
+    }
+
+    // todo
+    @Nonnull
+    @Override
+    protected List<String> verifiedEntityExt(@Nonnull ReceiveNoticeDetailPO entity) {
 
         List<String> result = new LinkedList<>();
 
         if(null == entity.getQuantity() || entity.getQuantity() < 1){
             result.add("[命中收货通知明细规则]收货明细数量不能少于 1。");
         }
+        return result;
+    }
+
+    @Nonnull
+    @Override
+    protected List<String> verifiedExt(@Nonnull ReceiveNoticeDetailPO entity, Exchange exchange) {
+
+        List<String> result = new LinkedList<>();
 
         QueryWrapper<ReceiveNoticePO> query = new QueryWrapper<>();
         query.eq("code",entity.getReceiveNoticeCode());
@@ -66,26 +83,4 @@ public class SimpleReceiveNoticeDetailVerification implements Processor {
         }
         return result;
     }
-
-    @Override
-    public void  process(Exchange exchange) throws Exception {
-
-        ReceiveNoticeDetailPO entity = exchange.getMessage().getBody(ReceiveNoticeDetailPO.class);
-
-        if(null == entity){
-            exchange.getMessage().setBody(new Result<>(false, "[命中收货通知明细规则]收货通知明细信息为空"));
-            return;
-        }
-
-        List<String> errors = verified(entity,exchange);
-
-        if(errors.isEmpty()) {
-            exchange.getMessage().setBody( new Result<>(entity));
-            return;
-        }
-
-        exchange.getMessage().setBody( new Result<>(false,errors));
-    }
-
-
 }
