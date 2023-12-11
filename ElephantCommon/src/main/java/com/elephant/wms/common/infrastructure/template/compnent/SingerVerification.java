@@ -5,6 +5,7 @@ import jakarta.annotation.Nonnull;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,9 @@ public abstract class SingerVerification<T> implements Processor {
      * @param entity
      * @return
      */
-    protected abstract @Nonnull List<String> verifiedEntityExt(@Nonnull T entity);
+    protected @Nonnull List<String> verifiedEntityExt(@Nonnull T entity){
+        return new LinkedList<>();
+    };
 
     /**
      * 用于对应具体 verified 业务要求校验
@@ -26,7 +29,9 @@ public abstract class SingerVerification<T> implements Processor {
      * @param exchange
      * @return
      */
-    protected abstract @Nonnull List<String> verifiedExt(@Nonnull T entity,Exchange exchange);
+    protected  @Nonnull List<String> verifiedExt(@Nonnull T entity,Exchange exchange){
+        return new LinkedList<>();
+    };
 
     private @Nonnull List<String> verified(T entity,Exchange exchange){
         List<String> result = verifiedEntityExt(entity);
@@ -55,6 +60,16 @@ public abstract class SingerVerification<T> implements Processor {
      */
     protected static String emptyError(Optional optional,String error){
         if(optional.isEmpty()) return error;
+        return "";
+    }
+
+    protected static String emptyError(List list,String error){
+        if(list.isEmpty()) return error;
+        return "";
+    }
+
+    protected static String notEmptyError(List list,String error){
+        if(!list.isEmpty()) return error;
         return "";
     }
 

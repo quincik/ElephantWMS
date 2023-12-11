@@ -24,6 +24,9 @@ public class SimpleReceiveOrderDetailVerification extends SingerVerification<Rec
     @Resource
     ItemService itemService;
 
+    @Resource
+    ReceiveBasicQuery receiveBasicQuery;
+
     protected @Nonnull List<String> verifiedOrderDetailRefExt(ReceiveOrderPO order,
                                                ReceiveOrderDetailPO detail){
         List<String> result = new LinkedList<>();
@@ -60,6 +63,9 @@ public class SimpleReceiveOrderDetailVerification extends SingerVerification<Rec
         if(null == entity.getActualQuantity() || entity.getActualQuantity() < 1){
             result.add(IN01B110001.getDesc());
         }
+        Optional<ItemService.ItemDTO> itemDTO =
+                itemService.queryByCode(entity.getItemCode(),entity.getOwnerCode());
+        appendError(result, emptyError(itemDTO,IN00B0000001.getDesc()));
         return result;
     }
 
@@ -69,15 +75,15 @@ public class SimpleReceiveOrderDetailVerification extends SingerVerification<Rec
 
         List<String> result = new LinkedList<>();
 
-        ReceiveOrderPO receiveOrderPO = ReceiveBasicQuery.getOrder(entity.getReceiveOrderCode());
+        ReceiveOrderPO receiveOrderPO = receiveBasicQuery.getOrder(entity.getReceiveOrderCode());
         appendError(result,verifiedOrderExt(receiveOrderPO));
-        exchange.getMessage().setHeader("receiveOrder",receiveOrderPO);
 
-        appendError(result,verifiedOrderDetailRefExt(receiveOrderPO,entity));
+        if(null != receiveOrderPO) {
+            exchange.getMessage().setHeader("receiveOrder", receiveOrderPO);
+            appendError(result, verifiedOrderDetailRefExt(receiveOrderPO, entity));
+        }
 
-        Optional<ItemService.ItemDTO> itemDTO =
-                itemService.queryByCode(entity.getItemCode(),entity.getOwnerCode());
-        appendError(result, emptyError(itemDTO,IN00B0000001.getDesc()));
+
         return result;
     }
 

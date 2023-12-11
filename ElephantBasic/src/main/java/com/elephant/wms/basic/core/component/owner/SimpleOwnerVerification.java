@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class SimpleOwnerVerification extends MultiVerification<OwnerPO> {
     @Override
-    public @Nonnull List<String> verified(OwnerPO entity) {
+    public @Nonnull List<String> verifiedEntityExt(OwnerPO entity) {
         List<String> result = new LinkedList<>();
         if(null == entity.getCode() || entity.getCode().isBlank()){
             result.add("编码为空");

@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class SimpleItemBatchVerification extends MultiVerification<ItemBatchPO> {
     @Override
-    public @Nonnull List<String> verified(ItemBatchPO entity) {
+    public @Nonnull List<String> verifiedEntityExt(ItemBatchPO entity) {
         List<String> result = new LinkedList<>();
         if(null == entity.getOwnerCode() || entity.getOwnerCode().isBlank()){
             result.add("货主编码为空");

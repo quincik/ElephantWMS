@@ -1,7 +1,9 @@
 package com.elephant.wms.input.core.domain;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.elephant.wms.input.infrastructure.mapper.ReceiveNoticeMapper;
 import com.elephant.wms.input.infrastructure.mapper.ReceiveOrderMapper;
+import com.elephant.wms.input.infrastructure.po.ReceiveNoticePO;
 import com.elephant.wms.input.infrastructure.po.ReceiveOrderDetailPO;
 import com.elephant.wms.input.infrastructure.po.ReceiveOrderPO;
 import jakarta.annotation.PostConstruct;
@@ -12,22 +14,20 @@ import org.springframework.stereotype.Component;
 public class ReceiveBasicQuery {
 
     @Resource
-    private  ReceiveOrderMapper innerMapper;
+    private  ReceiveOrderMapper receiveOrderMapper;
 
-    private static ReceiveOrderMapper receiveOrderMapper;
+    @Resource
+    private ReceiveNoticeMapper receiveNoticeMapper;
 
-    @PostConstruct
-    public void init() {
-        receiveOrderMapper = innerMapper;
-    }
-
-    public static ReceiveOrderPO getOrder(String code){
+    public  ReceiveOrderPO getOrder(String code){
         QueryWrapper<ReceiveOrderPO> query = new QueryWrapper<>();
         query.eq("code",code);
         return receiveOrderMapper.selectOne(query,false);
     }
 
-    public static ReceiveOrderDetailPO getOrderDetail(String code){
-        return null;
+    public ReceiveNoticePO getNotice(String code){
+        QueryWrapper<ReceiveNoticePO> query = new QueryWrapper<>();
+        query.eq("code",code);
+        return receiveNoticeMapper.selectOne(query,false);
     }
 }

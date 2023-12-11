@@ -11,9 +11,9 @@ import java.util.List;
 public class MultiVerificationDimensionalArea extends SimpleAreaVerification {
 
     @Override
-    public @Nonnull List<String> verified(AreaPO entity) {
+    public @Nonnull List<String> verifiedEntityExt(AreaPO entity) {
 
-        List<String> result = super.verified(entity);
+        List<String> result = super.verifiedEntityExt(entity);
         if(null == entity.getWidth()){
             result.add("宽度为空");
         }

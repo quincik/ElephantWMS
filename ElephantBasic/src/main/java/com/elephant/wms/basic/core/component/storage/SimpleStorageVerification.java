@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class SimpleStorageVerification extends MultiVerification<StoragePO> {
     @Override
-    public @Nonnull List<String> verified(StoragePO entity) {
+    public @Nonnull List<String> verifiedEntityExt(StoragePO entity) {
         List<String> result = new LinkedList<>();
         if(null == entity.getCode() || entity.getCode().isBlank()){
             result.add("编码为空");

@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class SimpleItemVerification extends MultiVerification<ItemPO> {
     @Override
-    public @Nonnull List<String> verified(ItemPO entity) {
+    public @Nonnull List<String> verifiedEntityExt(ItemPO entity) {
         List<String> result = new LinkedList<>();
         if(null == entity.getCode() || entity.getCode().isBlank()){
             result.add("编码为空");

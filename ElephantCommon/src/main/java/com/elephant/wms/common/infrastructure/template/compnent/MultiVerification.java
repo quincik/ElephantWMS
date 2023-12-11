@@ -6,6 +6,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public abstract class MultiVerification<T> implements Processor{
@@ -15,7 +16,28 @@ public abstract class MultiVerification<T> implements Processor{
      * @return
      * 返回 Not Null List
      */
-    public abstract  @Nonnull List<String> verified(T entity);
+
+    protected  @Nonnull List<String> verifiedEntityExt(@Nonnull T entity){
+        return new LinkedList<>();
+    };
+
+    /**
+     * 用于对应具体 verified 业务要求校验
+     * 具体 verified 主要逻辑实现
+     * @param entity
+     * @param exchange
+     * @return
+     */
+    protected @Nonnull List<String> verifiedExt(@Nonnull T entity,Exchange exchange){
+        return new LinkedList<>();
+    };
+
+    private @Nonnull List<String> verified(T entity,Exchange exchange){
+        List<String> result = verifiedEntityExt(entity);
+        if( ! result.isEmpty() ) return result;
+        result.addAll(verifiedExt(entity,exchange));
+        return result;
+    };
 
     public void  process(Exchange exchange) throws Exception {
 
@@ -29,7 +51,7 @@ public abstract class MultiVerification<T> implements Processor{
         }
 
         for (int i = 0; i < entities.size(); i++ ) {
-            List<String> entityInfo = verified(entities.get(i));
+            List<String> entityInfo = verified(entities.get(i),exchange);
             if( entityInfo.isEmpty() ) continue;
             detail.put(i+1,entityInfo);
         }
