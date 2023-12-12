@@ -4,6 +4,7 @@ import com.elephant.wms.common.infrastructure.object.Result;
 import jakarta.annotation.Nonnull;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.apache.logging.log4j.util.Strings;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -60,12 +61,17 @@ public abstract class SingerVerification<T> implements Processor {
      */
     protected static String emptyError(Optional optional,String error){
         if(optional.isEmpty()) return error;
-        return "";
+        return Strings.EMPTY;
     }
 
     protected static String emptyError(List list,String error){
         if(list.isEmpty()) return error;
-        return "";
+        return Strings.EMPTY;
+    }
+
+    protected static String conditionError(Boolean condition,String error){
+        if(condition) return error;
+        return Strings.EMPTY;
     }
 
     protected static String notEmptyError(List list,String error){

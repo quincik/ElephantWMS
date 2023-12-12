@@ -4,16 +4,19 @@ import com.elephant.wms.basic.infrastructure.po.AreaPO;
 import com.elephant.wms.common.infrastructure.template.compnent.MultiVerification;
 import jakarta.annotation.Nonnull;
 import org.apache.camel.Exchange;
+import org.apache.camel.util.function.Predicates;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Component
 public class SimpleAreaVerification extends MultiVerification<AreaPO> {
     @Override
     public @Nonnull List<String> verifiedEntityExt(AreaPO entity) {
         List<String> result = new LinkedList<>();
+
         if(null == entity.getCode() || entity.getCode().isBlank()){
             result.add("编码为空");
         }

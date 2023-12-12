@@ -58,6 +58,7 @@ public class SimpleReceiveNoticeDetailVerification extends SingerVerification<Re
                 itemService.queryByCode(entity.getItemCode(),entity.getOwnerCode());
         appendError(result, emptyError(itemDTO,IN00B0000001.getDesc()));
         return result;
+
     }
 
     protected @Nonnull List<String> verifiedNoticeExt(ReceiveNoticePO notice){
