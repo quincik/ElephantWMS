@@ -25,7 +25,7 @@ public class NoticeReceiveOrderDetailVerification  extends SimpleReceiveOrderDet
     ReceiveNoticeDetailMapper receiveNoticeDetailMapper;
 
     @Nonnull
-    protected List<String> verifiedNoticeDetail(ReceiveOrderDetailPO entity, Exchange exchange){
+    protected List<String> verifiedNoticeDetailExt(ReceiveOrderDetailPO entity, Exchange exchange){
 
         List<String> result = new LinkedList<>();
 
@@ -65,7 +65,7 @@ public class NoticeReceiveOrderDetailVerification  extends SimpleReceiveOrderDet
     protected List<String> verifiedExt(ReceiveOrderDetailPO entity, Exchange exchange) {
 
         List<String> result = super.verifiedExt(entity,exchange);
-        appendError(result,verifiedNoticeDetail(entity,exchange));
+        appendError(result,verifiedNoticeDetailExt(entity,exchange));
         return result;
 
     }
