@@ -33,7 +33,7 @@ public class ReceiveOrderDetailRest extends BasicRest {
     public Result<Boolean> create(@RequestBody Map<String, Object> param){
 
         Result<Boolean> result = (Result<Boolean>)
-                producerTemplate.requestBody("direct:createReceiveOrder", param);
+                producerTemplate.requestBody("direct:createReceiveOrderDetail", param);
         return result;
     }
 }

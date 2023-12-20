@@ -1,6 +1,7 @@
 package com.elephant.wms.input.core.component.orderdetail;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.elephant.wms.basic.interfaces.service.ItemBatchService;
 import com.elephant.wms.common.infrastructure.object.Result;
 import com.elephant.wms.input.core.enums.ReceiveNoticeStatus;
 import com.elephant.wms.input.core.enums.ReceiveOrderStatus;
@@ -18,6 +19,10 @@ import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 @Component
 public class SimpleReceiveOrderDetailCreate implements Processor {
 
@@ -25,6 +30,8 @@ public class SimpleReceiveOrderDetailCreate implements Processor {
     private ReceiveOrderDetailMapper receiveOrderDetailMapper;
     @Resource
     private ReceiveOrderMapper receiveOrderMapper;
+    @Resource
+    private ItemBatchService itemBatchService;
 
     @Override
     @Transactional
@@ -35,7 +42,12 @@ public class SimpleReceiveOrderDetailCreate implements Processor {
                 .getHeader("receiveOrder", ReceiveOrderPO.class);
         ReceiveOrderPO updateOrder= exchange.getMessage()
                 .getHeader("updateOrder", ReceiveOrderPO.class);
+        Map<String,Object> itemBatchParam = exchange.getMessage()
+                .getHeader("itemBatchParam", HashMap.class);
 
+        Optional<Long> itemBatch =  itemBatchService.create(itemBatchParam);
+
+        entity.setItemBatchId(itemBatch.get());
         int count = receiveOrderDetailMapper.insert(entity);
         if(0 == count){
             exchange.getMessage().setBody(new Result<>(false, "收货通知明细新增失败"));

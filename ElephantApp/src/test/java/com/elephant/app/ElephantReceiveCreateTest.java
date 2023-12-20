@@ -10,9 +10,12 @@ import com.elephant.wms.basic.infrastructure.po.ItemBatchPO;
 import com.elephant.wms.basic.infrastructure.po.ItemPO;
 import com.elephant.wms.basic.infrastructure.po.OwnerPO;
 import com.elephant.wms.basic.infrastructure.po.StoragePO;
+import com.elephant.wms.input.core.domain.ReceiveBasicQuery;
 import com.elephant.wms.input.core.enums.ReceiveNoticeStatus;
 import com.elephant.wms.input.infrastructure.mapper.ReceiveNoticeMapper;
+import com.elephant.wms.input.infrastructure.mapper.ReceiveOrderMapper;
 import com.elephant.wms.input.infrastructure.po.ReceiveNoticePO;
+import com.elephant.wms.input.infrastructure.po.ReceiveOrderPO;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.RepeatedTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +53,9 @@ public class ElephantReceiveCreateTest {
 
     @Resource
     private ReceiveNoticeMapper receiveNoticeMapper;
+
+    @Resource
+    private ReceiveOrderMapper receiveOrderMapper;
 
     @RepeatedTest(2)
     public void createReceiveNotice() throws Exception {
@@ -130,6 +136,42 @@ public class ElephantReceiveCreateTest {
 
         mockMvc.perform(
                         post("/receive/notice/detail/create").content(JSON.toJSONString(param))
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.success").isBoolean());
+    }
+
+    @RepeatedTest(1)
+    public void createReceiveOrderDetail() throws Exception {
+
+        Random random = new Random();
+
+        QueryWrapper<ReceiveOrderPO> query = new QueryWrapper<>();
+        query.last("limit 50");
+        query.eq("status", ReceiveNoticeStatus.CREATE);
+        List<ReceiveOrderPO> list = receiveOrderMapper.selectList(query);
+        ReceiveOrderPO noticePO = list.get(random.nextInt(list.size()));
+
+
+        QueryWrapper<ItemPO> queryItem = new QueryWrapper<>();
+        queryItem.last("limit 50");
+        List<ItemPO> listItem = itemMapper.selectList(queryItem);
+        ItemPO itemPO = listItem.get(random.nextInt(listItem.size()));
+
+        Map<String, Object> param  = new LinkedHashMap<>();
+        param.put("receiveOrderCode",noticePO.getCode() );
+        param.put("ownerCode",itemPO.getOwnerCode());
+        param.put("itemCode",itemPO.getCode());
+        param.put("standard",1);
+
+        param.put("actualQuantity",random.nextInt(100));
+
+
+
+        mockMvc.perform(
+                        post("/receive/order/detail/create").content(JSON.toJSONString(param))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON)
                 )

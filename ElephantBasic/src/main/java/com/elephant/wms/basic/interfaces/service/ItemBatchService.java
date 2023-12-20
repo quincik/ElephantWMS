@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.util.Map;
 import java.util.Optional;
 
 public interface ItemBatchService {
@@ -22,5 +23,6 @@ public interface ItemBatchService {
     }
 
     public Optional<ItemBatchDTO> queryById(Long id);
+    public Optional<Long> create(Map<String, Object> param);
 
 }
